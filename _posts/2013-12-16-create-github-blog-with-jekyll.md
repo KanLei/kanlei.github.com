@@ -27,7 +27,7 @@ tags: []
   
 #### Pygments 实现语法高亮
 
-首先，安装 easy_install 用于安装 Pygments.[setuptool](https://pypi.python.org/pypi/setuptools#windows-powershell-3-or-later)
+首先，安装 `easy_install` 用于安装 `Pygments`。 链接：[setuptool](https://pypi.python.org/pypi/setuptools#windows-powershell-3-or-later)
 
 以 `Powershell` 为例，以管理员身份运行 `Powershell`,并粘贴
 
@@ -49,13 +49,13 @@ easy_install --version
   
 使用 `easy_install` 安装
 
-``` python
+```
 Pygments: easy_install Pygments
 ```
 
 接着，生成语法高亮的样式文件：
 
-``` python
+```
 pygmentize -S default -f html > pygments.css
 ```
 

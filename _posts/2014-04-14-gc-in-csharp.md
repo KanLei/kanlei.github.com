@@ -44,10 +44,12 @@ GC 能够了解某个实体目前是否依旧被应用程序的某些活动对�
 public static void Main (string[] args)
 {
 	// 输出堆上的估计的字节数量
-	Console.WriteLine("Estimated bytes on heap: {0}", GC.GetTotalMemory(false));
+	Console.WriteLine("Estimated bytes on heap: {0}", 
+					   GC.GetTotalMemory(false));
 
 	// MaxGeneration 是从 0 开始的，为显示目的加 1
-	Console.WriteLine("This OS has {0} object generations.\n",(GC.MaxGeneration + 1));
+	Console.WriteLine("This OS has {0} object generations.\n",
+					 (GC.MaxGeneration + 1));
 
 	// 强制垃圾回收，并等待每一个对象都被终结
 	GC.Collect();

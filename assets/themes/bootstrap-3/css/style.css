@@ -14,7 +14,7 @@ body {
         font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
         font-size: 18px;
         /*margin: 3% 7% 5% 10%;*/
-        margin: 5% 5% 5% 8%;
+        margin: 5% 5% 5% 6%;
         padding: 0% 5% 5% 5%;
         width: 75%;
         line-height: 150%;
@@ -81,16 +81,21 @@ pre {
     background-color: Ivory;
     padding: 5px;
     line-height: 130%;
-    margin-left: 10px;
+    margin-left: 20px;
     width: 95%;
 }
-
 
 code {
     font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
     font-size: 90%;
 }
 
+@media(max-width:767px) {
+    code {
+        font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
+        font-size: 80%;
+    }
+}
 
 a {
     text-decoration: none;

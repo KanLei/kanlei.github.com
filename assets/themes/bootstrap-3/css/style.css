@@ -169,4 +169,16 @@ hr {
 }
 
 table {
+    font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
+    font-size: 80%;
+     border: solid 1px LightBlue;
+    -moz-border-radius: 3px; /* Gecko browsers */
+    -webkit-border-radius: 3px; /* Webkit browsers */
+    border-radius: 3px; /* W3C syntax */
+    text-align: center;
+    background-color: Ivory;
+    padding: 5px;
+    line-height: 130%;
+    margin-left: 10px;
+    width: 95%;
 }

@@ -154,7 +154,7 @@ We all know the Infix Expression, just to mention the expression.
 
 Now let us begin to design the priority for the operators:
 
-<table border="1" style="border: green 2px solid;border-collapse:collapse;text-align:center" >
+<table>
 <tr>
 <td>operator</td>
 <td>priority in stack</td>
@@ -275,7 +275,7 @@ static int CalculatorInfixExpression(string text)
 						int op1 = stackOperand.Pop();
 						int op2 = stackOperand.Pop();
 
-                        stackOperand.Push(
+                        stackOperand.Push(  
 							dicts[stackOperator.Pop()].Invoke(op2, op1));
                     } while (stackOperator.Peek() != "(");
 
@@ -288,7 +288,7 @@ static int CalculatorInfixExpression(string text)
                         int op1 = stackOperand.Pop();
                         int op2 = stackOperand.Pop();
 
-                        stackOperand.Push(
+                        stackOperand.Push(  
 							dicts[stackOperator.Pop()].Invoke(op2, op1));
                     } while (priority <= inStackPriority[stackOperator.Peek()]);
 

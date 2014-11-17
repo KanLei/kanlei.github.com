@@ -99,6 +99,22 @@ pre {
     width: 95%;
 }
 
+@media(max-width:767px) {
+    pre {
+        white-space: pre-wrap;
+        font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
+        font-size: 80%;
+        border: solid 1px lightgrey;
+        -moz-border-radius: 3px; /* Gecko browsers */
+        -webkit-border-radius: 3px; /* Webkit browsers */
+        border-radius: 3px; /* W3C syntax */
+        background-color: Ivory;
+        padding: 5px;
+        line-height: 130%;
+        margin-left: 10px;
+        width: 95%;
+    }
+}
 
 code {
     font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
@@ -114,7 +130,7 @@ a {
     color: black;
 }
 
-p a{
+p a {
     text-decoration: none;
     /*cursor: crosshair;*/
     border-bottom: 1px dotted Blue;
@@ -124,17 +140,17 @@ p a{
 
 
 a:hover {
-        /*background-color: LightGrey;*/
-        /*font-color:LightGrey;*/
-        border-bottom: 0px dashed Blue;
-    }
+    /*background-color: LightGrey;*/
+    /*font-color:LightGrey;*/
+    border-bottom: 0px dashed Blue;
+}
 
 p a:hover {
-        /*background-color: LightGrey;*/
-        /*font-color:LightGrey;*/
-        /*border-bottom: 0px dashed Blue;*/
-        border-bottom: 1px dashed Red;
-    }
+    /*background-color: LightGrey;*/
+    /*font-color:LightGrey;*/
+    /*border-bottom: 0px dashed Blue;*/
+    border-bottom: 1px dashed Red;
+}
 
 img {
     display: block;
@@ -150,4 +166,7 @@ img {
 
 hr {
     color: LightGrey;
+}
+
+table {
 }

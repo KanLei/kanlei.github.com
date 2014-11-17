@@ -275,7 +275,8 @@ static int CalculatorInfixExpression(string text)
 						int op1 = stackOperand.Pop();
 						int op2 = stackOperand.Pop();
 
-                        stackOperand.Push(dicts[stackOperator.Pop()].Invoke(op2, op1));
+                        stackOperand.Push(
+							dicts[stackOperator.Pop()].Invoke(op2, op1));
                     } while (stackOperator.Peek() != "(");
 
                     stackOperator.Pop();
@@ -287,7 +288,8 @@ static int CalculatorInfixExpression(string text)
                         int op1 = stackOperand.Pop();
                         int op2 = stackOperand.Pop();
 
-                        stackOperand.Push(dicts[stackOperator.Pop()].Invoke(op2, op1));
+                        stackOperand.Push(
+							dicts[stackOperator.Pop()].Invoke(op2, op1));
                     } while (priority <= inStackPriority[stackOperator.Peek()]);
 
                     stackOperator.Push(item);
@@ -320,7 +322,7 @@ Look at the above code between `else if` clause:
 int op1 = stackOperand.Pop();
 int op2 = stackOperand.Pop();
 
-stackOperand.Push(dicts[stackOperator.Pop()].Invoke(op2, op1));`
+stackOperand.Push(dicts[stackOperator.Pop()].Invoke(op2, op1));
 ```
 
 These codes are duplicated. Let us modify the condition and delete the duplicated code.

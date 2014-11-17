@@ -32,6 +32,7 @@ body {
         width: 80%;
         line-height: 150%;
         border: 1px solid LightGrey;
+        border-top: 0px solid LightGrey;
     }
 }
 

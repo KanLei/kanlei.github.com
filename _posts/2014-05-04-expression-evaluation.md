@@ -29,7 +29,7 @@ Postfix Expression(aka Reverse Polish Epxression), it put the operators behind t
 
 Postfix Expression is difficult to understand, but it is easier to implementation. We merely need one stack to save the operand. Think about this:
 
-> 1. read the expression from left to right
+1. read the expression from left to right
 2. push it to stack when read an operand
 3. when read an operator, pop two operands from the stack and use the operator performs arithmetic
 4. push the result value into the stack
@@ -90,7 +90,7 @@ Prefix Expression is similar to the Postfix Expression, we do not need parenthes
 
 Step by step for coding:
 
-> 1. read the expression from left to right
+1. read the expression from left to right
 2. push it to stack when read an operator
 3. when read an operand, if the top element of the stack is an operand, pop the operand and the operator, then performs arithmetic; otherwise push the operand into the stack
 4. push the result value into the stack
@@ -159,7 +159,7 @@ Now let us begin to design the priority for the operators:
 <td>operator</td>
 <td>priority in stack</td>
 <td>priority out of stack</td>
-<tr>
+</tr>
 <tr>
 <td>+ -</td>
 <td>1</td>
@@ -207,7 +207,7 @@ var outofStackPriority = new Dictionary<string, int>()
 
 Step by step for coding:
 
-> 1. read the expression from left to right
+1. read the expression from left to right
 2. push it into stack when read an `operand`
 3. when read an `operator` except `")"`, if the priority of the operator is higher than the top operator's in the operator stack, push it into the operator stack.Or pop two operands from the operand stack, then performs arithmetic; Finally, push the result value into the operand stack.
 4. When read a ")", does not push it into the operator stack. Instead of performing arithmetic until pop the "(".
@@ -323,12 +323,13 @@ Look at the above code between `else if` clause:
 int op1 = stackOperand.Pop();
 int op2 = stackOperand.Pop();
 
-stackOperand.Push(dicts[stackOperator.Pop()].Invoke(op2, op1));
+stackOperand.Push(  
+	dicts[stackOperator.Pop()].Invoke(op2, op1));
 ```
 
 These codes are duplicated. Let us modify the condition and delete the duplicated code.
 
-*Finally version*
+**Final version**
 
 ```c#
 bool isLeftBracket;
@@ -337,7 +338,8 @@ do
     int op1 = stackOperand.Pop();
     int op2 = stackOperand.Pop();
 
-    stackOperand.Push(dicts[stackOperator.Pop()].Invoke(op2, op1));
+    stackOperand.Push(  
+		dicts[stackOperator.Pop()].Invoke(op2, op1));
 } while (isLeftBracket = item == ")" ? stackOperator.Peek() != "(" :
     priority <= inStackPriority[stackOperator.Peek()]);
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "'Generic' in c"
+title: "Generic in C"
 description: ""
 category: "snippycode"
 tags: [c]

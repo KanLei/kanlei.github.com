@@ -21,4 +21,4 @@ static int GetAge(DateTime birthday)
 }
 ```
 
-[*reference*](http://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c)
+[*stackoverflow*](http://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c)

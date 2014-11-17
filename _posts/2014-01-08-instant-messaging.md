@@ -9,13 +9,13 @@ tags: [c#]
 
 ## 即时聊天
 
-    这是一个基于 UDP 协议的局域网多人即时聊天软件。
+这是一个基于 UDP 协议的局域网多人即时聊天软件。
 
-已经托管在 GitHub 上，[*here*](https://github.com/KanLei/InstantMessaging)
+已经托管在 GitHub 上，[github](https://github.com/KanLei/InstantMessaging)
 
 ## 设计图（design drawing）
 
-[*design*]({{ site.url }}/assets/pictures/instantmessaging/instantmessage.png)
+[design]({{ site.url }}/assets/pictures/instantmessaging/instantmessage.png)
 
 ## 界面 GUI
 
@@ -51,5 +51,3 @@ tags: [c#]
 7. Close two clients/logoff
 
     ![]({{ site.url }}/assets/pictures/instantmessaging/server5.png)
-
-End

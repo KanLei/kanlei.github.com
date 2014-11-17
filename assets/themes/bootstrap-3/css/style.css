@@ -114,12 +114,27 @@ a {
     color: black;
 }
 
+p a{
+    text-decoration: none;
+    /*cursor: crosshair;*/
+    border-bottom: 1px dashed Blue;
+    padding: 1px;
+    color: black;
+}
 
-    a:hover {
-        background-color: LightGrey;
+
+a:hover {
+        /*background-color: LightGrey;*/
         /*font-color:LightGrey;*/
+        border-bottom: 0px dashed Blue;
     }
 
+p a:hover {
+        /*background-color: LightGrey;*/
+        /*font-color:LightGrey;*/
+        /*border-bottom: 0px dashed Blue;*/
+        border-bottom: 1px dashed Red;
+    }
 
 img {
     display: block;

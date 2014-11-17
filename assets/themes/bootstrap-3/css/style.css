@@ -117,7 +117,7 @@ a {
 p a{
     text-decoration: none;
     /*cursor: crosshair;*/
-    border-bottom: 1px dashed Blue;
+    border-bottom: 1px dotted Blue;
     padding: 1px;
     color: black;
 }

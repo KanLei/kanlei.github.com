@@ -2,8 +2,8 @@
 layout: post
 title: "Operate System"
 description: ""
-category: ""
-tags: []
+category: "computer"
+tags: [computer]
 ---
 {% include JB/setup %}
 

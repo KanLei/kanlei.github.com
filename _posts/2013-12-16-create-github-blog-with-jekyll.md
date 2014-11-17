@@ -2,8 +2,8 @@
 layout: post
 title: "Create github blog with Jekyll"
 description: ""
-category: 
-tags: []
+category: "tutorial"
+tags: [git]
 ---
 {% include JB/setup %}
 

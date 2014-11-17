@@ -18,4 +18,4 @@ System.Console.WriteLine()方法、System.String.Format()方法在内部都调�
 >在 Debug 模式下，将鼠标放置到对象上会现实 ToString() 中所描述的内容。
 也可以用特性(Attribute) DebugDisplay("Name={PropertyName},...") 来替代。
 
-source: Effective C#: 50 Specific Ways to Improve Your C#
+Effective C#: 50 Specific Ways to Improve Your C#

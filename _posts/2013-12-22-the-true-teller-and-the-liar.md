@@ -3,7 +3,7 @@ layout: post
 title: "The true teller and the liar"
 description: ""
 category: "brain-teaser"
-tags: []
+tags: [brainteaser]
 ---
 {% include JB/setup %}
 

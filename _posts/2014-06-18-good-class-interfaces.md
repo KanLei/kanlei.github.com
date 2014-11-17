@@ -3,7 +3,7 @@ layout: post
 title: "Good Class Interfaces"
 description: ""
 category: "Book"
-tags: [c#]
+tags: [book]
 ---
 {% include JB/setup %}
 
@@ -122,4 +122,4 @@ switch(ui.Command())
 - 把相关操作放到一起
 - 实现特定的重构
 
-source: Code Complete
+Code Complete

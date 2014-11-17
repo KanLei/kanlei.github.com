@@ -169,4 +169,4 @@ private class WhereListIterator<TSource> : Enumerable.Iterator<TSource>
 
 > Given a small set, the two would likely perform comparably. However, given a larger set, Where should outperform FindAll, as the new List created to contain the results will have to dynamically grow to contain additional results. Memory usage of FindAll will also start to grow exponentially as the number of matching results increases, where as Where should have constant minimal memory usage (in and of itself...excluding whatever you do with the results.) 
 
-[*reference*](http://stackoverflow.com/questions/2260220/c-sharp-findall-vs-where-speed)
+[*stackoverflow*](http://stackoverflow.com/questions/2260220/c-sharp-findall-vs-where-speed)

@@ -308,7 +308,8 @@ static int CalculatorInfixExpression(string text)
         int op1 = stackOperand.Pop();
         int op2 = stackOperand.Pop();
 
-        stackOperand.Push(dicts[stackOperator.Pop()].Invoke(op2, op1));
+        stackOperand.Push(  
+			dicts[stackOperator.Pop()].Invoke(op2, op1));
     }
     return stackOperand.Pop();
 }

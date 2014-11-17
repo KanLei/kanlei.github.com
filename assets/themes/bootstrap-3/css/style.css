@@ -35,6 +35,22 @@ body {
     }
 }
 
+nav {
+    font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+    position: fixed;
+    border: solid 1px LightGray;
+    opacity: 0.9;
+    height: 9%;
+    width: 99%;
+    top: 0%;
+    left: 0.5%;
+    border-radius: 3px; /* W3C syntax */
+}
+
+    nav div {
+        margin-left: 45%;
+        margin-top: 2%;
+    }
 
 H1 {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;

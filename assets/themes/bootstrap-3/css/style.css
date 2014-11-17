@@ -8,6 +8,18 @@ body {
     border: 1px solid LightGrey;
 }
 
+@media(min-width:768px) and (max-width:1199px) {
+    body {
+        font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+        font-size: 17px;
+        /*margin: 3% 7% 5% 10%;*/
+        margin: 5% 10% 5% 15%;
+        padding: 0% 5% 5% 5%;
+        width: 60%;
+        line-height: 150%;
+        border: 1px solid LightGrey;
+    }
+}
 
 @media(max-width:767px) {
     body {
@@ -21,6 +33,7 @@ body {
         border: 1px solid LightGrey;
     }
 }
+
 
 H1 {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
@@ -72,6 +85,7 @@ blockquote {
 
 
 pre {
+    white-space: pre-wrap;
     font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
     font-size: 80%;
     border: solid 1px lightgrey;
@@ -85,34 +99,12 @@ pre {
     width: 95%;
 }
 
-@media(max-width:767px) {
-    pre {
-        white-space: pre-wrap;
-        font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
-        font-size: 80%;
-        border: solid 1px lightgrey;
-        -moz-border-radius: 3px; /* Gecko browsers */
-        -webkit-border-radius: 3px; /* Webkit browsers */
-        border-radius: 3px; /* W3C syntax */
-        background-color: Ivory;
-        padding: 5px;
-        line-height: 130%;
-        margin-left: 10px;
-        width: 95%;
-    }
-}
 
 code {
     font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
     font-size: 90%;
 }
 
-@media(max-width:767px) {
-    code {
-        font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
-        font-size: 80%;
-    }
-}
 
 a {
     text-decoration: none;

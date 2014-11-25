@@ -17,7 +17,7 @@ public async Task<string> DownloadAsync(string url)
 	...
 	Task<string> content = client.GetStringAsync(url);
 	...
-	string result = awiat conent;
+	string result = await conent;
 	return result;
 }
 ```

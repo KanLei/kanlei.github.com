@@ -8,7 +8,10 @@ tags: [book]
 {% include JB/setup %}
 
 
+![]({{ site.url }}/assets/pictures/book/hackersandpainters.jpg)
+
 ## 书中的观点
+
 
 为什么「书呆子」不受欢迎？因为他们的心思在别的地方，你在这个地方有所得就会在其它的地方有所失
 

@@ -64,4 +64,5 @@ using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, 
 
 [*Asynchronous Programming*](http://msdn.microsoft.com/en-us/library/hh191443(v=vs.110).aspx) / 
 [*Scott Hanselman*](http://www.hanselman.com/blog/TheMagicOfUsingAsynchronousMethodsInASPNET45PlusAnImportantGotcha.aspx) / 
-[*asp.net*](http://www.asp.net/web-forms/overview/performance-and-caching/using-asynchronous-methods-in-aspnet-45)
+[*asp.net*](http://www.asp.net/web-forms/overview/performance-and-caching/using-asynchronous-methods-in-aspnet-45) /
+[*Be Aware Of The Synchronization-Context*](http://www.gamlor.info/wordpress/2010/10/c-5-0-async-feature-be-aware-of-the-synchronization-context/)

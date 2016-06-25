@@ -14,7 +14,7 @@ tags: [Xamarin.iOS, UITextView]
 ## 解决方案
 
 ``` c#
-var size = TextView.SizeThatFits(new CGSize(width, nfloat.MaxValue);
+var size = TextView.SizeThatFits(new CGSize(width, nfloat.MaxValue));
 ```
 
 注意，`width` 可通过 `UIScreen.MainScreen.Bounds.Width` 计算得到，如果在 `GetHeightForRow` 中提前计算，则当前 `TableCell` 的 `ContentView.Frame`, `ContentView.Bounds`, `TextView.Frame` 以及 `TextView.Bounds` 不能反映出实际显示在屏幕中的尺寸。

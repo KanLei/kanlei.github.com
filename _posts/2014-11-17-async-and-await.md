@@ -38,7 +38,13 @@ public async Task MyMethodAysnc()
 
 这里的 `await DownloadAsync("http://...")` 并不会开始异步执行，而是直到执行到方法体中的 `client.GetStringAsync(url)` 时，才会开始真正的异步。
 
-## 捕获同步上下文
+## 上下文
+
+#### 同步上下文
+
+同步上下文与线程有关，在 `UI` 线程中请求 `SynchronizationContext.Current` 得到如 `UIKitSynchronizationContext` 的上下文对象；如果在工作线程中请求 `SynchronizationContext.Current` 得到 null，表示默认使用 `SynchronizationContext` 的实现。
+
+`SynchronizationContext` 的默认实现与 `UI` 无关，在其调用线程上执行同步委托，在 ThreadPool 中执行异步委托。
 
 `await` 默认会捕获同步上下文，如果是 `GUI` 程序，捕获的是 `UI` 线程，所以 `await` 后的更新 `UI` 界面的操作是合法的；如果是 `Console` 程序，默认捕获的是线程池线程。然而，捕获 `UI` 线程会导致占用主线程资源，因此最好的方式是不捕获 `UI` 线程，使用线程池线程来执行。
 
@@ -46,6 +52,7 @@ public async Task MyMethodAysnc()
 // 使用线程池线程
 await DownloadAsync("http://...").ConfigAwait(false);
 ```
+#### 执行上下文
 
 线程执行时默认会拥有自己的上下文，上下文中保存的线程执行时寄存器中的值和一些环境信息，当启动一个新的线程时，默认执行上下文会流向新线程，以便于新线程能够访问原线程的一些信息，通常我们不会去考虑执行上下文。关于同步上下文与执行上下文 [ExecutionContext vs SynchronizationContext](http://blogs.msdn.com/b/pfxteam/archive/2012/06/15/executioncontext-vs-synchronizationcontext.aspx) 。
 
@@ -61,8 +68,18 @@ using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, 
 
 普通的 `I/O` 操作，当线程从 user-mode 到 kernel-mode 读取磁盘文件时，由于读取磁盘文件的操作不涉及到线程，因此线程会被阻塞，直到文件读取完成，线程获取读取结果并恢复执行。而异步的 `I/O` 操作，上面 `true` 参数和 `ReadAsync` 方法结合使用，当读取磁盘文件时，线程不会被阻塞，而是立即返回，如果是线程池线程，则返回线程池，等下执行下一个任务单元。这种方式减少了不必要线程的创建，从而解决了系统资源，提升了性能，特别是在执行数据库访问操作时，大大增加了服务器的可响应性，可扩展性。 [Synchronous and Asynchronous I/O](http://msdn.microsoft.com/en-us/library/windows/desktop/aa365683(v=vs.85).aspx)
 
+**Note**:
+
+[*The zen of async: Best practices for best performance*](https://channel9.msdn.com/events/Build/BUILD2011/TOOL-829T)
+
+> Cache tasks when applicable.  
+> Use ConfigureAwait(false) in libraries.  
+> Avoid gratuitous use of ExecutionContext.  
+> Remove unnecessary locals.  
+> Avoid unnecessary awaits.
+
 
 [*Asynchronous Programming*](http://msdn.microsoft.com/en-us/library/hh191443(v=vs.110).aspx) / 
 [*Scott Hanselman*](http://www.hanselman.com/blog/TheMagicOfUsingAsynchronousMethodsInASPNET45PlusAnImportantGotcha.aspx) / 
 [*asp.net*](http://www.asp.net/web-forms/overview/performance-and-caching/using-asynchronous-methods-in-aspnet-45) /
-[*Be Aware Of The Synchronization-Context*](http://www.gamlor.info/wordpress/2010/10/c-5-0-async-feature-be-aware-of-the-synchronization-context/)
+[*Be Aware Of The Synchronization-Context*](http://www.gamlor.info/wordpress/2010/10/c-5-0-async-feature-be-aware-of-the-synchronization-context/) / [*Understanding-SynchronizationContext*](http://www.codeproject.com/Articles/31971/Understanding-SynchronizationContext-Part-I)

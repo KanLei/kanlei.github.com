@@ -66,7 +66,7 @@ using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, 
 
 ```
 
-普通的 `I/O` 操作，当线程从 user-mode 到 kernel-mode 读取磁盘文件时，由于读取磁盘文件的操作不涉及到线程，因此线程会被阻塞，直到文件读取完成，线程获取读取结果并恢复执行。而异步的 `I/O` 操作，上面 `true` 参数和 `ReadAsync` 方法结合使用，当读取磁盘文件时，线程不会被阻塞，而是立即返回，如果是线程池线程，则返回线程池，等下执行下一个任务单元。这种方式减少了不必要线程的创建，从而解决了系统资源，提升了性能，特别是在执行数据库访问操作时，大大增加了服务器的可响应性，可扩展性。 [Synchronous and Asynchronous I/O](http://msdn.microsoft.com/en-us/library/windows/desktop/aa365683(v=vs.85).aspx)
+普通的 `I/O` 操作，当线程从 user-mode 到 kernel-mode 读取磁盘文件时，由于读取磁盘文件的操作不涉及到线程，因此线程会被阻塞，直到文件读取完成，线程获取读取结果并恢复执行。而异步的 `I/O` 操作，上面 `true` 参数和 `ReadAsync` 方法结合使用，当读取磁盘文件时，线程不会被阻塞，而是立即返回，如果是线程池线程，则返回线程池，等下执行下一个任务单元。这种方式减少了不必要线程的创建，从而解决了系统资源，提升了性能，特别是在执行数据库访问操作时，大大增加了服务器的可响应性，可扩展性。[Performing IO Bounds Asynchronous Operations](https://www.wintellectnow.com/Videos/Watch/performing-i-o-bound-asynchronous-operations?videoId=performing-i-o-bound-asynchronous-operations) 
 
 **Note**:
 
@@ -82,4 +82,5 @@ using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, 
 [*Asynchronous Programming*](http://msdn.microsoft.com/en-us/library/hh191443(v=vs.110).aspx) / 
 [*Scott Hanselman*](http://www.hanselman.com/blog/TheMagicOfUsingAsynchronousMethodsInASPNET45PlusAnImportantGotcha.aspx) / 
 [*asp.net*](http://www.asp.net/web-forms/overview/performance-and-caching/using-asynchronous-methods-in-aspnet-45) /
-[*Be Aware Of The Synchronization-Context*](http://www.gamlor.info/wordpress/2010/10/c-5-0-async-feature-be-aware-of-the-synchronization-context/) / [*Understanding-SynchronizationContext*](http://www.codeproject.com/Articles/31971/Understanding-SynchronizationContext-Part-I)
+[*Be Aware Of The Synchronization-Context*](http://www.gamlor.info/wordpress/2010/10/c-5-0-async-feature-be-aware-of-the-synchronization-context/) / [*Understanding-SynchronizationContext*](http://www.codeproject.com/Articles/31971/Understanding-SynchronizationContext-Part-I) / 
+[*Synchronous and Asynchronous I/O*](http://msdn.microsoft.com/en-us/library/windows/desktop/aa365683(v=vs.85).aspx)

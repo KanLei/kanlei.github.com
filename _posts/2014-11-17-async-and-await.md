@@ -38,6 +38,12 @@ public async Task MyMethodAysnc()
 
 这里的 `await DownloadAsync("http://...")` 并不会开始异步执行，而是直到执行到方法体中的 `client.GetStringAsync(url)` 时，才会开始真正的异步。
 
+## 异常捕获
+
+`async` 方法的返回值类型有 `void`, `Task`, `Task<T>`，其中 `void` 返回类型导致异常直接抛出，而无法被 `try/catch` 捕获到，只用于事件注册。`Task` 和 `Task<T>` 返回类型默认会把异常包装到 `Task` 对象中，只有调用该对象的相关方法如，`await` 该 `Task` 才会触发异常并抛出。
+
+注意 `async lambda` 要使用 `Func<Task>` 作为类型，以为 `Action` 类型默认返回值为 `void`，会导致异常无法被正常捕获。
+
 ## 上下文
 
 #### 同步上下文
@@ -52,6 +58,10 @@ public async Task MyMethodAysnc()
 // 使用线程池线程
 await DownloadAsync("http://...").ConfigAwait(false);
 ```
+执行不进行 UI 操作的异步方法应该使用 `ConfigAwait(false)` 来提升性能，特别是类库中异步方法。 `await` 的方法立即执行结束时，此如果时该方法还未捕获当前同步上下文，因此执行在 UI 线程上，所以后续方法仍需要执行 `ConfigAwait(false)` 避免捕获同步上下文。
+
+每个方法的执行上下文是独立的，因此如果 A -> B, 在 B 中使用 `ConfigAwait(false)` 后，B 中剩余的方法在线程池线程上执行，而 A 中的剩余方法仍然在 UI 线程中执行。
+
 #### 执行上下文
 
 线程执行时默认会拥有自己的上下文，上下文中保存的线程执行时寄存器中的值和一些环境信息，当启动一个新的线程时，默认执行上下文会流向新线程，以便于新线程能够访问原线程的一些信息，通常我们不会去考虑执行上下文。关于同步上下文与执行上下文 [ExecutionContext vs SynchronizationContext](http://blogs.msdn.com/b/pfxteam/archive/2012/06/15/executioncontext-vs-synchronizationcontext.aspx) 。

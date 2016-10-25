@@ -105,6 +105,12 @@ tags: [Xamarin.iOS]
 
 **生成项目并修复编译错误**
 
+*Cannot create an instance of ... because it is an abstract class*
+
+> 当绑定生成代码包含抽象类，用 `Protocol` 修饰时，如果生成的代码中要用到该类时，如 `Test`，需要手动添加一个对应的 `interface` 定义，如 `interface ITest{}` 并在其余用到 `Test` 类的地方，将其替换为`ITest`。此时编译器会在 `ITest` 接口中定义 `Test` 类中标注了 `Abstract` 的方法，其余方法以扩展方法的形式生成在一个新的如 `Test_Extension` 类中。[Protocol 生成代码](https://developer.xamarin.com/guides/cross-platform/macios/binding/binding-types-reference/#Protocols)
+ 
+有时候我们无法 `new` 一个抽象类，此时可以采用 `ObjCRuntime.Runtime.GetNSObject()` 间接地获取该对象，并通过 `PerformSelector()` 的方式发送消息。
+
 #### 附
 [C# 与 Objective-C](https://developer.xamarin.com/guides/ios/advanced_topics/xamarin_for_objc/) /
 [Events, Protocol and Delegates](https://developer.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events/) /

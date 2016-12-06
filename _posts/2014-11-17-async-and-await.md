@@ -89,6 +89,7 @@ using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, 
 > Avoid unnecessary awaits.
 
 
+[*Why use async await*](https://msdn.microsoft.com/en-us/magazine/hh456403.aspx) / 
 [*Asynchronous Programming*](http://msdn.microsoft.com/en-us/library/hh191443(v=vs.110).aspx) / 
 [*Scott Hanselman*](http://www.hanselman.com/blog/TheMagicOfUsingAsynchronousMethodsInASPNET45PlusAnImportantGotcha.aspx) / 
 [*asp.net*](http://www.asp.net/web-forms/overview/performance-and-caching/using-asynchronous-methods-in-aspnet-45) /

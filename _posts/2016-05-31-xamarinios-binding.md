@@ -81,6 +81,12 @@ tags: [Xamarin.iOS]
 
 会生成 APIDefinition 和 StructsAndEnums 文件。
 
+## .Framework
+
+在 iOS 8 之前，Xcode 只允许创建 **static library**，导致二进制和头文件不能一起分发。后来，有些开发者想出了**static framework**, 因此，虽然包含在 **.framework** 目录下，依然是 **static library**，所以我们可以直接在二进制问价加后缀 *.a* 即可作为绑定引用。[参考](http://stackoverflow.com/questions/27899799/ios-static-vs-dynamic-frameworks-clarifications)
+
+在 iOS 8 之后，使用 `Xcode` 创建的 `embedded framework` 需要以 [**Native Reference**](https://developer.xamarin.com/guides/cross-platform/macios/native-references/) 的方式使用。
+
 ## 创建 C# 绑定项目
 上一节我们完成了绑定之前的所有准备工作，现在我们来着手创建绑定项目，该项目最终会生成动态链接库 (dll) 供我们使用。
 

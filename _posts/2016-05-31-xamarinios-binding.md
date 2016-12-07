@@ -83,9 +83,20 @@ tags: [Xamarin.iOS]
 
 ## .Framework
 
-在 iOS 8 之前，Xcode 只允许创建 **static library**，导致二进制和头文件不能一起分发。后来，有些开发者想出了**static framework**, 因此，虽然包含在 **.framework** 目录下，依然是 **static library**，所以我们可以直接在二进制问价加后缀 *.a* 即可作为绑定引用。[参考](http://stackoverflow.com/questions/27899799/ios-static-vs-dynamic-frameworks-clarifications)
+> Frameworks for iOS 8. iOS developers can now create dynamic frameworks. Frameworks are a collection of code and resources to encapsulate functionality that is valuable across multiple projects. Frameworks work perfectly with extensions, sharing logic that can be used by both the main application, and the bundled extensions.
 
-在 iOS 8 之后，使用 `Xcode` 创建的 `embedded framework` 需要以 [**Native Reference**](https://developer.xamarin.com/guides/cross-platform/macios/native-references/) 的方式使用。
+在 iOS 8 之前，Xcode 只允许创建 **static library**，导致二进制文件和头文件需要单独分发。后来，一些开发者提出了使用 **static framework** 的方式合并二进制文件和头文件到同一目录下， 此时，虽然二进制文件包含在 **.framework** 目录下，却依然是 **static library**，所以我们通过在二进制文件名后加 *.a* 后缀，接着在绑定库中引用。[参考](http://stackoverflow.com/questions/27899799/ios-static-vs-dynamic-frameworks-clarifications)
+
+在 iOS 8 之后，Apple 提供了 **embedded framwork**，用于分发模块化可共享的代码，使用 `Xcode` 创建的 **embedded framework** 需要以 [**Native Reference**](https://developer.xamarin.com/guides/cross-platform/macios/native-references/) 的方式使用。
+
+**Embedded Framwork** 与 **Dynamic Framework** 并不是对立关系，**Dynamic Framework** 与 **Static Framework** 是对立关系。[Abount Embbed Framwork](http://stackoverflow.com/questions/25080914/will-ios-8-support-dynamic-linking)
+
+[Static vs dynamic frameworks](http://stackoverflow.com/questions/27899799/ios-static-vs-dynamic-frameworks-clarifications) /
+[Library? Static? Dynamic? Or Framework?](http://stackoverflow.com/questions/15331056/library-static-dynamic-or-framework-project-inside-another-project) /
+[Creating and distributing embedded framworks in iOS](http://code.hootsuite.com/an-introduction-to-creating-and-distributing-embedded-frameworks-in-ios/) /
+[Framework Programming Guide](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WhatAreFrameworks.html) /
+[Dynamic Library Programming Topics](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html#//apple_ref/doc/uid/TP40001873-SW1)
+
 
 ## 创建 C# 绑定项目
 上一节我们完成了绑定之前的所有准备工作，现在我们来着手创建绑定项目，该项目最终会生成动态链接库 (dll) 供我们使用。

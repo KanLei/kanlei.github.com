@@ -36,9 +36,9 @@ test.ToLower();
 
 正确的处理方式我们需要在启用了异常报告组件后，恢复 `Xamarin.iOS` 对这些信号的捕获和处理。
 
-参考示例：[Demo1](https://github.com/stampsy/hockeyapp-monotouch/blob/master/src/SampleApp/AppDelegate.cs) | [Demo2](https://github.com/DefinitelyBound/xamarin-ios/blob/master/TestFlight/binding/testflight-threadsafe.cs) | [Demo3](https://github.com/GNOME/banshee/blob/stable-2.2/src/Core/Banshee.Core/Banshee.Base/PlatformHacks.cs)
+参考示例：[Demo1](https://github.com/stampsy/hockeyapp-monotouch/blob/master/src/SampleApp/AppDelegate.cs) / [Demo2](https://github.com/DefinitelyBound/xamarin-ios/blob/master/TestFlight/binding/testflight-threadsafe.cs) / [Demo3](https://github.com/GNOME/banshee/blob/stable-2.2/src/Core/Banshee.Core/Banshee.Base/PlatformHacks.cs)
 
-``` c#
+~~~ c#
 enum Signal
 {
 	SIGBUS = 10,
@@ -72,7 +72,7 @@ private void EnableCrashReporting ()
 	Marshal.FreeHGlobal (sigsegv);
 	Marshal.FreeHGlobal (sigpipe);
 }
-```
+~~~
 
 在 `AppDelegate` 中的 `FinishedLaunching` 方法开始出调用 `EnableCrashReporting`。
 

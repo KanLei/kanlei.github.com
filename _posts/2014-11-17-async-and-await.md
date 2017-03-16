@@ -42,7 +42,10 @@ public async Task MyMethodAysnc()
 
 `async` 方法的返回值类型有 `void`, `Task`, `Task<T>`，其中 `void` 返回类型导致异常直接抛出，而无法被 `try/catch` 捕获到，只用于事件注册。`Task` 和 `Task<T>` 返回类型默认会把异常包装到 `Task` 对象中，只有调用该对象的相关方法如，`await` 该 `Task` 才会触发异常并抛出。
 
-注意 `async lambda` 要使用 `Func<Task>` 作为类型，以为 `Action` 类型默认返回值为 `void`，会导致异常无法被正常捕获。
+> 注意 `async lambda` 要使用 `Func<Task>` 作为类型，因为 `Action` 类型默认返回值为 `void`，会导致异常无法被正常捕获。
+
+使用 `async` 的标准规范是 **async all the way**，但是当主方法无法使用 `async` 关键字时，如 `static void Main()`，这时我们可以定义一个中间方法，这个中间方法的返回值为 `Task`，因此在主方法中调用该中间方法而不去 `await` 它。但是，这会引发另外一个问题，该中间方法的后续代码会被提前执行，由于我们没有显示地等待中间方法执行结束，我们可以使用 `Wait()` 或者 `Result` 方式，但这种做法会阻塞线程，且容易造成死锁。另一种方式是显示地使用 `Task` 手动创建一个任务并执行它，但由于我们显示地创建 `Task`，所有发生在 `Task` 中的异常都无法被抛出，因此我们需要在 `Task` 的执行方法中显示地使用 `try/catch` 进行异常捕获。[getting start with async await](https://blog.xamarin.com/getting-started-with-async-await/)
+
 
 ## 上下文
 

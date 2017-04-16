@@ -11,7 +11,7 @@ tags: [singleton]
 
 **Double-Checked Locking** 被广泛引用，并且在多线程环境中被作为一种延迟初始化的有效方式。
 
-不幸的是，它在与平台无关的 `Java` 语言实现中，在没有额外的同步条件下，并不能保证其可信性。比如在 `C++` 语言中的实现，需要依赖于处理器的内存模型，编译器的重排执行和编译器与同步类库之间的交互。由于以上条件在 `C++` 语言中没有明确规定，因此很难确定地说哪种情形下这种锁机制才管用。我们确实可以通过显示地内存屏障(memory barriers)让其在 `C++` 中正常工作，但这并不适用于 `Java`。
+不幸的是，它在与平台无关的 `Java` 语言实现中，在没有额外的同步条件下，并不能保证其可靠性。比如在 `C++` 语言中的实现，需要依赖于处理器的内存模型，编译器的重排执行和编译器与同步类库之间的交互。由于以上条件在 `C++` 语言中没有明确规定，因此很难确定地说哪种情形下这种锁机制才管用。我们确实可以通过显示地内存屏障(memory barriers)让其在 `C++` 中正常工作，但这并不适用于 `Java`。
 
 为了先解释我们所期望的行为，考虑下面的代码：
 
@@ -67,7 +67,7 @@ class Foo {
 
 ### 不起作用
 
-有很多理由证明 **double-checked locking** 不起作用。我们先来介绍几个比较明显的理由，理解了之后，你可能试图想设计一种方式来解决这个问题。但是你并不会成功，因为有更多的微小的理由会出现，当你再一次理解了这些理由之后，并自信地提出了一种新的解决方案，它依然无法正常工作，因为又出现了更多微小的理由。
+有许多理由证明 **double-checked locking** 不起作用。我们先来介绍几个比较明显的理由，理解了之后，你可能试图想设计一种方式来解决这个问题。但是你并不会成功，因为有更多的微小的理由会出现，当你再一次理解了这些理由之后，并自信地提出了一种新的解决方案，然而却依然无法正常工作，因为又出现了更多微小的理由。
 
 很多非常聪明的人花费了许多时间来解决这个问题，但是除了让每个线程同步地访问 `helper` 对象，没有其它的方式能解决这个问题。
 
@@ -81,7 +81,7 @@ class Foo {
 
 Doug Lea 写了一篇 [more detailed description of compiler-based reorderings](http://gee.cs.oswego.edu/dl/cpj/jmm.html)。
 
-##### 一个测试例子展示不起作用
+##### 一个无效测试例子展示
 
 Paul Jakubik 发现一个使用 `double-checked locking` 不能正确工作的例子 [A slightly cleaned up version of that code is available here](http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckTest.java)。
 
@@ -103,7 +103,7 @@ Paul Jakubik 发现一个使用 `double-checked locking` 不能正确工作的�
 
 正如你所看到的，赋值给 `sinletons[i].reference` 在调用构造 `Singleton` 之前。在现有的 `Java` 内存模型中是完全合法的，并且在 `C` 和 `C++` 中也是合法的(因为它们没有内存模型)。
 
-##### 一个不起作用的修复
+##### 一个无效的修复
 
 考虑到上面的解释后，一些人建议这样做：
 
@@ -133,7 +133,7 @@ class Foo {
 
 不幸的是，这种意图完全错了。同步的规则不会按这种方式执行。Monitorexit(如释放同步)的规则是在 `monitorexit` 之前的操作，在 `monitor` 被释放前一定要被执行。然后没有规则说 monitorexit 之后的操作可能不被完成在 `monitor` 释放之前。编译器移动 `helper = h;` 语句到同步块中是完全有理由且合法的，这又回到了我们之前的情景。许多处理器提供执行这种单方向内存屏障的指令。改变要求释放一个锁的语义为一个完全的内存屏障导致性能受损。
 
-##### 更多不起作用的修复
+##### 更多无效的修复
 
 你可以通过某种方式强制写入器执行一个完全的双向的内存屏障。但这种方式是粗略且低效的，且当 `Java` 内存模型发生更改时无法保证能继续正常工作。不要这样使用，这里可以了解更多，[I've put a description of this technique on a separate page](http://www.cs.umd.edu/~pugh/java/memoryModel/BidirectionalMemoryBarrier.html)。再次强调，不要使用。
 

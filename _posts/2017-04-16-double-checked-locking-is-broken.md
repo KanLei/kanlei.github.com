@@ -7,7 +7,7 @@ tags: [singleton]
 ---
 {% include JB/setup %}
 
-> [The "Double-Checked Locking is Broken" Declaration](http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html)
+> [译][The "Double-Checked Locking is Broken" Declaration](http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html)
 
 **Double-Checked Locking** 被广泛引用，并且在多线程环境中被作为一种延迟初始化的有效方式。
 
@@ -18,13 +18,13 @@ tags: [singleton]
 ``` java
 // Single threaded version
 class Foo {
-	private Helper helper = null;
-	public Helper getHelper() {
-		if (helper == null)
-			helper = new Helper();
-		return helper;
-	}
-	// other functions and members...
+    private Helper helper = null;
+    public Helper getHelper() {
+        if (helper == null)
+            helper = new Helper();
+        return helper;
+    }
+    // other functions and members...
 }
 ```
 
@@ -33,13 +33,13 @@ class Foo {
 ``` java
 // Correct multithreaded version
 class Foo {
-	private Helper helper = null;
-	public synchronized Helper getHelper() {
-		if (helper == null)
-			helper = new Helper();
-		return helper;
-	}
-	// other functions and members...
+    private Helper helper = null;
+    public synchronized Helper getHelper() {
+        if (helper == null)
+            helper = new Helper();
+        return helper;
+    }
+    // other functions and members...
 }
 ```
 
@@ -49,17 +49,17 @@ class Foo {
 // Broken multithreaded version
 // "Double-Checked Locking" idiom
 class Foo {
-	private Helper helper = null;
-	public Helper getHelper() {
-		if (helper == null) {
-			synchronized(this) {
-				if (helper == null)
-					helper = new Helper();
-			}
-			return helper;
-		}
-		// other functions and members...
-	}
+    private Helper helper = null;
+    public Helper getHelper() {
+    if (helper == null) {
+        synchronized(this) {
+            if (helper == null)
+                helper = new Helper();
+        }
+        return helper;
+    }
+    // other functions and members...
+    }
 }
 ```
 
@@ -111,22 +111,22 @@ Paul Jakubik 发现一个使用 `double-checked locking` 不能正确工作的�
 // (Still) Broken multithreaded version
 // "Double-Checked Locking" idiom
 class Foo {
-	private Helper helper = null;
-	public Helper getHelper() {
-		if (helper == null) {
-			Helper h;
-			synchronized(this) {
-				h = helper;
-				if (h == null)
-					synchronized(this) {
-						h = new Helper();
-					}  // release inner synchronization lock
-				helper = h;
-			}
-		}
-		return helper;
-	}
-	// other functions and members...
+    private Helper helper = null;
+    public Helper getHelper() {
+        if (helper == null) {
+            Helper h;
+            synchronized(this) {
+                h = helper;
+                if (h == null)
+                    synchronized(this) {
+                        h = new Helper();
+                    }  // release inner synchronization lock
+                helper = h;
+            }
+        }
+        return helper;
+    }
+    // other functions and members...
 }
 ```
 这段代码将构造 `Helper` 对象放到了内部的同步块。直观的思想是同步释放处应该有一个内存屏障，用于阻止 `Helper` 对象的初始化和字段的赋值重排。
@@ -159,7 +159,7 @@ class Foo {
 
 ``` java
 class HelperSingleton {
-	static Helper singleton = new Helper();
+    static Helper singleton = new Helper();
 }
 ```
 
@@ -170,18 +170,18 @@ class HelperSingleton {
 ```java
 // Correct Double-Checked Locking for 32-bit primitives
 class Foo {
-	private int cachedHashCode = 0;
-	public int hashCode() {
-		int h = cachedHashCode;
-		if (h == 0)
-			synchronized(this) {
-				if (cachedHashCode != 0) return cachedHashCode;
-				h = computeHashCode();
-				cachedHashCode = h;
-			}
-			return h;
-	}
-	// other functions and members...
+    private int cachedHashCode = 0;
+    public int hashCode() {
+        int h = cachedHashCode;
+        if (h == 0)
+            synchronized(this) {
+                if (cachedHashCode != 0) return cachedHashCode;
+                h = computeHashCode();
+                cachedHashCode = h;
+            }
+        return h;
+    }
+    // other functions and members...
 }
 ```
 
@@ -191,16 +191,16 @@ class Foo {
 // Lazy initialization 32-bit primitives
 // Thread-safe if computeHashCode is idempotent
 class Foo {
-	private int cachedHashCode = 0;
-	public int hashCode() {
-		int h = cachedHashCode;
-		if (h == 0) {
-			h = computeHashCode();
-			cachedHashCode = h;
-		}
-		return h;
-	}
-	// other functions and members...
+    private int cachedHashCode = 0;
+    public int hashCode() {
+        int h = cachedHashCode;
+        if (h == 0) {
+            h = computeHashCode();
+            cachedHashCode = h;
+        }
+        return h;
+    }
+    // other functions and members...
 }
 ```
 
@@ -215,26 +215,26 @@ class Foo {
 // by Doug Schmidt
 template <class TYPE, class LOCK> TYPE *
 Singleton<TYPE, LOCK>::instance (void) {
-	// First check
-	TYPE* tmp = instance_;
-	// Insert the CPU-specific memory barrier instruction
-	// to synchronize the cache lines on multi-processor.
-	asm("memoryBarrier");
-	if (tmp == 0) {
-		// Ensure serialization (guard
-		// constructor acquires lock_).
-		Guard<LOCK> guard (lock_);
-		// Double check.
-		tmp = instance_;
-		if (tmp == 0) {
-			tmp = new TYPE;
-			// Insert the CPU-specific memory barrier instruction
-			// to synchronize the cache lines on multi-processor.
-			asm("memoryBarrier");
-			instance_ = tmp;
-		}
-	}
-	return tmp;
+    // First check
+    TYPE* tmp = instance_;
+    // Insert the CPU-specific memory barrier instruction
+    // to synchronize the cache lines on multi-processor.
+    asm("memoryBarrier");
+    if (tmp == 0) {
+        // Ensure serialization (guard
+        // constructor acquires lock_).
+        Guard<LOCK> guard (lock_);
+        // Double check.
+        tmp = instance_;
+        if (tmp == 0) {
+            tmp = new TYPE;
+            // Insert the CPU-specific memory barrier instruction
+            // to synchronize the cache lines on multi-processor.
+            asm("memoryBarrier");
+            instance_ = tmp;
+        }
+    }
+    return tmp;
 }
 ```
 
@@ -244,22 +244,22 @@ Alexander Terekhov (TEREKHOV@de.ibm.com)提出一个聪明的建议，用线程�
 
 ```java
 class Foo {
-	/** If perThreadInstance.get() returns a non-null value, this thread
+    /** If perThreadInstance.get() returns a non-null value, this thread
 	has done synchronization needed to see initialization
 	of helper */
 	private final ThreadLocal perThreadInstance = new ThreadLocal();
 	private Helper helper = null;
 	public Helper getHelper() {
-		if (perThreadInstance.get() == null) createHelper();
-		return helper;
+	    if (perThreadInstance.get() == null) createHelper();
+	        return helper;
 	}
 	private final void createHelper() {
-		synchronized(this) {
-			if (helper == null)
-				helper = new Helper();
-		}
-		// Any non-null value would do as the argument here
-		perThreadInstance.set(perThreadInstance);
+	    synchronized(this) {
+	        if (helper == null)
+	            helper = new Helper();
+	    }
+	    // Any non-null value would do as the argument here
+	    perThreadInstance.set(perThreadInstance);
 	}
 }
 ```
@@ -280,16 +280,16 @@ JDK5 和之后的版本扩展了 `volatile` 的语义，该语义使系统不被
 // Works with acquire/release semantics for volatile
 // Broken under current semantics for volatile
 class Foo {
-	private volatile Helper helper = null;
-	public Helper getHelper() {
-		if (helper == null) {
-			synchronized(this) {
-				if (helper == null)
-					helper = new Helper();
-			}
-		}
-		return helper;
-	}
+    private volatile Helper helper = null;
+    public Helper getHelper() {
+        if (helper == null) {
+            synchronized(this) {
+            if (helper == null)
+                helper = new Helper();
+            }
+        }
+        return helper;
+    }
 }
 ```
 

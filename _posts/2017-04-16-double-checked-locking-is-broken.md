@@ -75,7 +75,7 @@ class Foo {
 
 最明显的理由是构造 `Helper` 对象与赋值给 `helper` 字段会出现次序颠倒。因此，一个线程调用 `getHelper()` 查看 `helper` 对象字段的默认值时，可能会看到一个非空(non-null)的对 `helper` 对象的引用，而不是通过构造函数设置的值。
 
-如果编译器内联调用到构造函数，那么在编译器在保证不抛出任何异常或者同步执行的条件下，初始化对象和赋值给 `helper` 字段可以被自由地重新排序。
+如果编译器内联调用到构造函数，那么编译器在保证不抛出任何异常或者同步执行的条件下，初始化对象和赋值给 `helper` 字段可以被自由地重新排序。
 
 即使编译器不会重排这些写指令，在一个多处理器环境，当一个线程运行在另一个处理器上时，处理器或内存系统可能会重排这些写操作。
 
@@ -165,7 +165,7 @@ class HelperSingleton {
 
 ### 对32位原始值(primitive values)起作用
 
-尽管 `double-checked locking` 原语不能被用于引用对象，却可以用于32位额原始值(比如int和float)。注意对long和double不起作用，因为64位非同步的读/写基原(primitives)不保证是原子的。
+尽管 `double-checked locking` 原语不能被用于引用对象，却可以用于32位的原始值(比如 int 和 float)。注意对 long 和 double 不起作用，因为64位非同步的读/写基原(primitives)不保证是原子操作。
 
 ```java
 // Correct Double-Checked Locking for 32-bit primitives

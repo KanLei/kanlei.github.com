@@ -21,7 +21,7 @@ App 中有一个提交页面，当点击提交按钮操作后导致崩溃。
 
 经过测试发现，在 `Xamarin.iOS` 中，`new NSUrl(...)` 包含中文字符时默认会抛出异常；而 `NSUrl.FromString(...)` 包含中文字符时，默认会返回空，并不抛出异常。
 
-解决方式，构造 `NSString` 实例，通过实例方法 `CreateStringByAddingPercentEscapes (NSStringEncoding.UTF8)` 转义中文字符为 UT8 编码，构造 `NSUrl`，恢复中文字符使用实例方法 `CreateStringByReplacingPercentEscapes (NSStringEncoding.UTF8)`。
+解决方式，构造 `NSString` 实例，通过实例方法 `CreateStringByAddingPercentEscapes (NSStringEncoding.UTF8)` 转义中文字符为 `UTF8` 编码，构造 `NSUrl`，恢复中文字符使用实例方法 `CreateStringByReplacingPercentEscapes (NSStringEncoding.UTF8)`。
 
 [*RFC 3986*](https://tools.ietf.org/html/rfc3986)  
 [*NSURL*](https://developer.apple.com/reference/foundation/nsurl)

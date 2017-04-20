@@ -77,7 +77,7 @@ public static void Main (string[] args)
 `IDisposable.Dispose()` 方法的实现中需要完成如下4个任务*：
 
 1. 释放所有非托管资源
-2. 释放所有托管资源，包括释放事件监听程序
+2. ~~释放所有托管资源~~，包括释放事件监听程序
 3. 设置一个状态标志，表示该对象已经被销毁，若是在销毁之后再次调用对象的公有方法，那么应该抛出 ObjectDisposed 异常。
 4. 跳过终结操作，调用 GC.SuppressFinalize(this) 即可
 

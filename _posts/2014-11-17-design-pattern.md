@@ -43,7 +43,8 @@ tags: [book, design pattern]
 
 单例模式是设计模式中最简单也是最为人所知的模式。单个实例的情况很多，比如，我们常用的 `Control Panel` 和 `Task Manager` 都是同时只能有一个实例。单例中要注意的情况是多线程的环境下是否会导致创建多个实例。
 [Singleton](https://msdn.microsoft.com/en-us/library/ff650316.aspx)  
-[Implementing the Singleton Pattern in C#](http://csharpindepth.com/Articles/General/Singleton.aspx)
+[Implementing the Singleton Pattern in C#](http://csharpindepth.com/Articles/General/Singleton.aspx)  
+[Write a Singleton in Swift](https://krakendev.io/blog/the-right-way-to-write-a-singleton)
 
 ## 组合模式
 

@@ -198,11 +198,18 @@ window.SetContents(
 
 ## 建造者模式
 
-**{ 构建复杂对象 }**
+**{ 分离构建与表示 }**
 
 >将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。
 
 如果只是构造一个简单的对象，我们可以使用`工厂方法`。当构造一个复杂的对象时，往往我们会分步骤一步一步地进行构建，`Director`指挥着构建步骤的顺序，`Builder`则定义了要实现步骤的抽象接口。抽象对象构造的步骤，使得这些步骤的不同实现能构造出不同对象的表示。
+
+```csharp
+var builder = new ConcreteBuilder();
+var director = new Director(builder);
+director.Construct(); // builder build part 1, 2, 3
+var result = builder.GetResult()
+```
 
 `StringBuilder` ≠ `Builder`：[*stackoverflow*](http://stackoverflow.com/questions/5238007/stringbuilder-and-builder-pattern)  
 `Builder`的另一种理解方式：[*stackoverflow*](http://stackoverflow.com/questions/328496/when-would-you-use-the-builder-pattern/1953567#1953567)

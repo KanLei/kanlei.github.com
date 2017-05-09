@@ -51,6 +51,8 @@ public async Task MyMethodAysnc()
 
 #### 同步上下文
 
+> `SynchronizationContext` 是用于解决当不同的应用程序，比如 `ASP.NET`、`WinForm` 或者 `WPF` 共用某一类库时，如果想要执行更新 `UI` 操作，必须区分对待不同的应用以获得 `UI Thread`，`SynchronizationContext` 使得我们可以在类库中忽略具体的应用类型，不同的应用类型提供一个具体的 `Concrete`  `SynchronizationContext`，而我们在类库中只需使用 `SynchronizationContext` 即可。[UIKitSynchronizationContext](https://github.com/xamarin/xamarin-macios/blob/master/src/UIKit/UIKitSynchronizationContext.cs)
+
 同步上下文与线程有关，在 `UI` 线程中请求 `SynchronizationContext.Current` 得到如 `UIKitSynchronizationContext` 的上下文对象；如果在工作线程中请求 `SynchronizationContext.Current` 得到 null，表示默认使用 `SynchronizationContext` 的实现。
 
 `SynchronizationContext` 的默认实现与 `UI` 无关，在其调用线程上执行同步委托，在 ThreadPool 中执行异步委托。

@@ -14,13 +14,13 @@ tags: []
 ```csharp
 interface IEnumerable
 {
-	IEnumerator GetEnumerator();
+    IEnumerator GetEnumerator();
 }
 
 interface IEnumerator: IDisposable
 {
-	bool MoveNext();
-	object Current { get; }
+    bool MoveNext();
+    object Current { get; }
 }
 
 ```
@@ -32,14 +32,14 @@ interface IEnumerator: IDisposable
 ```csharp
 interface IObservable
 {
-	IDisposable Subscribe(IObserver observer);
+    IDisposable Subscribe(IObserver observer);
 }
 
 interface IObserver
 {
-	void OnNext(object value);
-	void OnCompletion();
-	void OnError(Exception ex);
+    void OnNext(object value);
+    void OnCompletion();
+    void OnError(Exception ex);
 }
 ```
 

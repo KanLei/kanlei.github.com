@@ -9,7 +9,7 @@ tags: [c#]
 
 ## 简述
 
-.Net 应用程序是在托管环境中运行的，C# programmer 从来不直接从内存中删除一个托管对象（如：C 中的 free() 或 C++ 中的 delete）；.Net 对象会被分配到一块叫做托管堆（managed heap）的内存区域上。.Net GC(Garbage Collector) 垃圾收集器会替你控制这块托管的内存区域的回收。因此在 .Net 中你一般不用担心内存泄露、悬挂指针等问题。
+.Net 应用程序是在托管环境中运行的，C# programmer 从来不直接从内存中删除一个托管对象（如：C 中的 free() 或 C++ 中的 delete，以及 Objective-C 中的 [release](https://www.tomdalling.com/blog/cocoa/an-in-depth-look-at-manual-memory-management-in-objective-c/)），.Net 对象会被分配到一块叫做托管堆（managed heap）的内存区域上。.Net GC(Garbage Collector) 垃圾收集器会替你控制这块托管的内存区域的回收。因此在 .Net 中你一般不用担心内存泄露、悬挂指针等问题。
 
 ## `new` 指令
 
@@ -24,7 +24,7 @@ tags: [c#]
 
     如果托管堆没有足够的内存来分配所请求的对象，就会进行垃圾回收
 
-当进行垃圾回收时，垃圾回收器会暂时**挂起当前的进程中所有活动的线程**，以保证应用程序在回收过程中不会访问堆。
+当进行垃圾回收时，垃圾回收器会暂时**挂起当前的进程中所有活动的线程** { [Concurrent GC](http://www.mono-project.com/news/2017/05/17/concurrent-gc-news/?utm_campaign=Weekly%2BXamarin&utm_medium=email&utm_source=Weekly_Xamarin_127)可以减少线程被挂起的时间 }，以保证应用程序在回收过程中不会访问堆。
 
 ## 检查回收对象
 

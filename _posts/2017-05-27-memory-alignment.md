@@ -78,7 +78,7 @@ struct Data {
 
 ### 内存布局的应用
 
-在 `Swift` 语言中，我们可以通过 `Mirror` 结构体来访问类型的成员，但却无法对其值进行更改，而如果又需要对其值进行更改，那么绕过 `Mirror` 直接对对象所在的内存地址进行存取，这就需要我们了解类型在真实内存的中布局规则。
+在 `Swift` 语言中，我们可以通过 `Mirror` 结构体来访问类型的成员，但却无法对其值进行更改，只能绕过 `Mirror` 直接对对象所在的内存地址进行存取，这就需要我们了解类型在内存的中布局规则。
 
 
 [Code](https://github.com/KanLei/ExtensionMirror)
@@ -88,4 +88,5 @@ struct Data {
 [*Purpose of memory alignment*](https://stackoverflow.com/questions/381244/purpose-of-memory-alignment) / 
 [*Swift 中的指针使用*](https://onevcat.com/2015/01/swift-pointer/) / 
 [*Swift进阶之内存模型和方法调度*](http://blog.csdn.net/hello_hwc/article/details/53147910) / 
-[*Swift 对象内存模型探究1*](https://mp.weixin.qq.com/s/zIkB9KnAt1YPWGOOwyqY3Q)
+[*Swift 对象内存模型探究1*](https://mp.weixin.qq.com/s/zIkB9KnAt1YPWGOOwyqY3Q) /
+[*Using Pointers And Interacting With C*](https://www.raywenderlich.com/148569/unsafe-swift)

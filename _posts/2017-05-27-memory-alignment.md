@@ -78,7 +78,35 @@ struct Data {
 
 ### 内存布局的应用
 
-在 `Swift` 语言中，我们可以通过 `Mirror` 结构体来访问类型的成员，但却无法对其值进行更改，只能绕过 `Mirror` 直接对对象所在的内存地址进行存取，这就需要我们了解类型在内存的中布局规则。
+在 `Swift` 语言中，我们可以通过 `Mirror` 结构体来访问类型的成员，但却无法对其值进行更改，唯一更改值的方式是绕过 `Mirror` 直接对实例所在的内存地址进行存取，这就需要我们了解类型在内存的中布局规则。
+
+`Swift` 中我们可以使用 **&** 得到实例所在的内存地址，但只能以参数传递的方式使用 **&**，而不能直接在表达式或语句中使用。`Swift` 为我们提供了获取实例指针的便捷方法。
+
+- withUnsafePointer
+- withUnsafeMutablePointer
+- withUnsafeBytes
+- withUnsafeMutableBytes
+
+**Mutable** 是指得到的是一个可更改的指针。
+
+以 `Data` 为例，如果我们想通过内存地址获取和修改 `data2` 的值，我们可以这样做：
+
+```swift
+var data = Data(data1: 1, data2: 2, data3: 3)
+print(data.data2)  // 2
+
+withUnsafeMutablePointer(to: &data) { pointer in
+    var ptr = UnsafeMutableRawPointer(pointer)
+                .advanced(by: 4)
+                .assumingMemoryBound(to: Int32.self)
+    ptr.pointee = 20
+    
+}
+
+print(data.data2)  // 20
+```
+
+首先将 `data` 实例作为参数传递给 `withUnsafeMutablePointer` 方法，得到的 `pointer` 类型为 `UnsafeMutablePointer<Data>` 以便于我们可以对指针进行更改，接着将 `pointer` 转化为 `UnsafeMutableRawPointer`，方便将指针按字节进行移动(advanced 移动的单位由当前指针类型所决定，如果要移动单个字节距离，需要先转化为 UnsafeMutableRawPointer 类型)，移动 4 个字节的距离，以保证当前指针所处位置为 `data2` 的起始地址，最后将指针 **Bound** 到指定类型，以便于安全的对数据进行读取。
 
 
 [Code](https://github.com/KanLei/ExtensionMirror)

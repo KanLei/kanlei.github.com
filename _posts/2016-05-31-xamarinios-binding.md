@@ -103,7 +103,7 @@ tags: [Xamarin.iOS]
 
 打开 Xamarin Studio -> New Solution -> iOS(Library) -> Bindings Library，输入 Project Name:TestBinding.iOS 和 Solution Name:TestBinding，Create。
 
-接着将我们上节中生成的 `ApiDefinition.cs` 和 `StructsAndEnum.cs` 中的代码分别复制并粘贴到对应的文件中。将生成的 C.a 文件拖放到 TestBinding.iOS 项目上，并选择复制到项目。这时我们会看到 Xamarin Studio 会自动帮我们生成了 C.linkwith.cs 文件，我们需要手动修改该文件，增加绑定过程中需要的参数配置信息。
+接着将我们上节中生成的 `ApiDefinition.cs` 和 `StructsAndEnum.cs` 中的代码分别复制并粘贴到对应的文件中。~~将生成的 C.a 文件拖放到 TestBinding.iOS 项目上，并选择复制到项目。这时我们会看到 Xamarin Studio 会自动帮我们生成了 C.linkwith.cs 文件，我们需要手动修改该文件，增加绑定过程中需要的参数配置信息。~~ 上面这种方式已被弃用，新的方式是使用 **NativeReference** 并在属性配置栏中完成以下相关配置。
 
 **LinkTarget** 表示生成的库支持的架构，通过我们会指定
 > `LinkTarget.ArmV7|LinkTarget.ArmV7s|`  
@@ -125,6 +125,15 @@ tags: [Xamarin.iOS]
 *Cannot create an instance of ... because it is an abstract class*
 
 > 当绑定生成代码包含抽象类，用 `Protocol` 修饰时，如果生成的代码中要用到该类时，如 `Test`，需要手动添加一个对应的 `interface` 定义，如 `interface ITest{}` 并在其余用到 `Test` 类的地方，将其替换为`ITest`。此时编译器会在 `ITest` 接口中定义 `Test` 类中标注了 `Abstract` 的方法，其余方法以扩展方法的形式生成在一个新的如 `Test_Extension` 类中。[Protocol 生成代码](https://developer.xamarin.com/guides/cross-platform/macios/binding/binding-types-reference/#Protocols)
+ 
+ *Attempting to JIT compile method*
+ 
+ > 如果在调用绑定库中实例方法时出现该错误，需要打开项目配置的 [*iOS Build* -> *Linker behavior* 改为 *Dont't Link* 即可](https://forums.xamarin.com/discussion/2184/attempting-to-jit-compile-method)。如果你只是想移除特定引用程序集的 *linker*，在 *AssemblyInfo* 文件中将 *[assembly: LinkerSafe]* 标记删除即可。
+ 
+[*Linking in iOS*](https://developer.xamarin.com/guides/ios/advanced_topics/linker/)   
+[*Custom Linker Configuration*](https://developer.xamarin.com/guides/cross-platform/advanced/custom_linking/)  
+[*Realm-dotnet*](https://github.com/realm/realm-dotnet/pull/622/files)  
+[*linker*](http://www.mono-project.com/docs/tools+libraries/tools/linker/)
  
 有时候我们无法 `new` 一个抽象类，此时可以采用 `ObjCRuntime.Runtime.GetNSObject()` 间接地获取该对象，并通过 `PerformSelector()` 的方式发送消息。
 

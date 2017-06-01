@@ -106,7 +106,7 @@ withUnsafeMutablePointer(to: &data) { pointer in
 print(data.data2)  // 20
 ```
 
-首先将 `data` 实例作为参数传递给 `withUnsafeMutablePointer` 方法，得到的 `pointer` 类型为 `UnsafeMutablePointer<Data>` 以便于我们可以对指针进行更改，接着将 `pointer` 转化为 `UnsafeMutableRawPointer`，方便将指针按字节进行移动(advanced 移动的单位由当前指针类型所决定，如果要移动单个字节距离，需要先转化为 UnsafeMutableRawPointer 类型)，移动 4 个字节的距离，以保证当前指针所处位置为 `data2` 的起始地址，最后将指针 **Bound** 到指定类型，以便于安全的对数据进行读取。
+首先将 `data` 实例作为参数传递给 `withUnsafeMutablePointer` 方法，得到 类型为`UnsafeMutablePointer<Data>` 的 `pointer`，以便于我们可以对指针进行更改，接着将 `pointer` 转化为 `UnsafeMutableRawPointer`，方便将指针按字节进行移动(advanced 移动的单位由当前指针类型所决定，如果要移动单个字节单位，需要先转化为 UnsafeMutableRawPointer 类型)，移动 4 个字节的距离，以保证当前指针所处位置为 `data2` 的起始地址，最后将指针 **Bound** 到指定类型，以便于安全的对数据进行读取。
 
 
 [Code](https://github.com/KanLei/ExtensionMirror)

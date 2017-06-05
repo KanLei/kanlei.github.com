@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Exception in Xamarin.iOS with CrashReporter"
+title: "Signals with Xamarin.iOS"
 description: ""
 category: 
 tags: [Xamarin.iOS]
@@ -78,9 +78,83 @@ private void EnableCrashReporting ()
 
 如果你使用的 `Bugtags`，那么可以通过设置 `Bugtags` 忽略 `Signal` 异常来手动禁用信号量异常的捕获。
 
-### 附
+### Signals
 
-[Unix Signal](https://en.wikipedia.org/wiki/Unix_signal)
+#### Signals 简介
 
+Signals 是软中断(software interrupts)，提供了一种处理异步事件的方式。每一个 Signal 都有其对应的名称，名称默认以 **SIG** 开头。
+
+生成 Signal 的方式主要有以下几种：
+
+- 终端生成，比如你在终端上按下 Ctrl+C，会停止当前进程继续执行
+- 硬件生成，比如除0指令操作，当硬件检测到该操作时，会首先通知内核(kernel)，然后内核负责生成合适的 Signal 通知当前执行的进程
+- kill 命令，我们可以手动指定要中断的进程 ID，并传递指定的 Signal，可通过 `man kill` 查看具体使用方式
+- 软件生成，比如当进程写入一个没有读者的管道时，软件通知内核并生成 Signal 通知给当前进程
+
+针对 Signal，我们也可以不同的处理方式：
+
+- 忽略 Signal，但是 SIGKILL 和 SIGSTOP 不能被忽略，因为这是保证终结进程的唯一方式
+- 捕获 Signal，我们需要提供处理对应 Signal 的 handler，以便于当 Signal 发生时供内核调用
+- 执行默认操作，为了安全起见，通常默认操作会终止当前进程
+
+打开 mac 上的 terminal，输入 `man signal` 可以查看 signal 定义描述以及 mac 支持 31 中不同的 signal。
+
+#### Signals 使用方式
+
+新建一个 C 项目，引入 \<signal.h> 头文件后，我们就可以定义对应的 Signals Handler 了。
+
+> Signals 的实现实际定义在 \<sys/signal.h> 头文件中，由于 Signal 同时供内核和用户级程序使用，所以通常做法是，实现被放置在内核的头文件中，被用户级头文件所引用。
+
+```c
+#include <stdio.h>
+#include <signal.h>
+#include <unistd.h>
+
+void sig_handler(int);
+
+int main(int argc, const char * argv[]) {
+    printf("Hello, World!\n");
+    
+    if (signal(SIGUSR1, sig_handler) == SIG_ERR)
+        printf("can't catch SIGUSR1\n");
+    if (signal(SIGUSR2, sig_handler) == SIG_ERR)
+        printf("can't catch SIGUSR2\n");
+    for( ; ; )
+        pause();
+    
+    return 0;
+}
+
+void sig_handler(int signo)
+{
+    if (signo == SIGUSR1)
+        printf("received SIGUSR1\n");
+    else if (signo == SIGUSR2)
+        printf("received SIGUSR2\n");
+    else
+        printf("received undefined signal\n");
+    
+}
+```
+
+首先我们编译上面的 main.c 文件，`gcc main.c` 默认会在当前目录下生成 a.out 文件，接着我们执行该文件：
+
+```bash
+$ ./a.out &
+[1] 6154
+Hello, World!
+$ kill -USR1 6154
+received SIGUSR1
+$ kill -USR2 6154
+received SIGUSR2
+$ kill 6154
+[1]+  Terminated: 15          ./a.out
+$ 
+```
+
+通过执行上面的命令，可以发现，我们手动处理了 `SIGUSR1` 和 `SIGUSR2`，所以终端输出对应的处理信息。
+
+[*Unix Signal*](https://en.wikipedia.org/wiki/Unix_signal) /
+[*Handling unhandled exceptions and signals*](https://www.cocoawithlove.com/2010/05/handling-unhandled-exceptions-and.html) / 
 [*How to prevent iOS crash reporters from crashing MonoTouch apps?*](http://stackoverflow.com/questions/14499334/how-to-prevent-ios-crash-reporters-from-crashing-monotouch-apps/14499336#14499336)  /
 [*Avoiding Common Networking Mistakes*](https://developer.apple.com/library/content/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/CommonPitfalls/CommonPitfalls.html)

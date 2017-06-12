@@ -82,14 +82,16 @@ struct Data {
 
 `Swift` 中我们可以使用 **&** 得到实例所在的内存地址，但只能以参数传递的方式使用 **&**，而不能直接在表达式或语句中使用。`Swift` 为我们提供了获取实例指针的便捷方法。
 
-- withUnsafePointer() - UnsafePointer<T>
-- withUnsafeMutablePointer() - UnsafeMutablePointer<T>
+- withUnsafePointer() - UnsafePointer\<T>
+- withUnsafeMutablePointer() - UnsafeMutablePointer\<T>
 - withUnsafeBytes() - UnsafeRawBufferPointer
 - withUnsafeMutableBytes() - UnsafeMutableRawBufferPointer
-- ... - [UnsafeRawPointer](https://developer.apple.com/reference/swift/unsaferawpointer)
-- ... - [UnsafeMutableRawPointer](https://developer.apple.com/reference/swift/unsafemutablerawpointer)
+- [UnsafeRawPointer](https://developer.apple.com/reference/swift/unsaferawpointer)
+- [UnsafeMutableRawPointer](https://developer.apple.com/reference/swift/unsafemutablerawpointer)
+- UnsafeBufferPointer\<T\>
+- UnsafeMutableBufferPointer\<T>
 
-**Mutable** 是指一个可更改的指针；**Buffer** 是指一块连续的内存地址，如 `Array`；**Raw** 是指一个处理原始字节的指针，与内存是否绑定到指定类型无关，由于是直接移动字节单位的位置，可以使用 `load(as: <T.Type>)` 方法替换 `pointee` 取值。
+**Mutable** 是指一个可更改的指针；**\<T>** 是指绑定到指定类型; **Buffer** 是指一块连续的内存地址，如 `Array`；**Raw** 是指一个处理原始字节的指针，与内存是否绑定到指定类型无关，由于是直接移动字节单位的位置，可以使用 `load(as: <T.Type>)` 方法替换 `pointee` 取值。
 
 #### struct
 

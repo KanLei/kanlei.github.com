@@ -185,6 +185,10 @@ img {
     margin-top: 10px;
     margin-bottom: 10px;
     -webkit-box-shadow: 0 0 10px #555;
+    width: auto;
+    height: auto;
+    max-width: 95%;
+    max-height: 95%;
 }
 
 

@@ -99,6 +99,20 @@ Signals 是软中断(software interrupts)，提供了一种处理异步事件的
 
 打开 mac 上的 terminal，输入 `man signal` 可以查看 signal 定义描述以及 mac 支持 31 中不同的 signal。
 
+#### Signals 的生成
+
+Signals 主要源自**内核**、**进程自身**、**其它进程**，最终由**硬件**、 **kill** 和 **pthread_kill** 生成。
+
+硬件、操作系统和用户生成的 Signals 会首先经过 [Mach](https://en.wikipedia.org/wiki/Mach_(kernel)) 层，转化为 Mach Exceptions，如果异常未被处理，会继续传递到 [BSD](https://developer.apple.com/library/content/documentation/Darwin/Conceptual/KernelProgramming/BSD/BSD.html) 层，由该层负责将 Exceptions 转化为 UNIX Signals。如果程序自身中的异常未被捕获，异常会最终转化为 Signals。
+
+在 `Objective-C` 中通常使用 `NSUncaughtExceptionHandler` 和 `signal` 来定义默认的未捕获异常和信号处理机制，以便记录错误信息和保存数据。
+
+
+![hardware-generated signals]({{ site.url }}/assets/pictures/ios/hardware-generated-signals.png)
+
+![software-generated signals]({{ site.url }}/assets/pictures/ios/software-generated-signals.png)
+
+
 #### Signals 使用方式
 
 新建一个 C 项目，引入 \<signal.h> 头文件后，我们就可以定义对应的 Signals Handler 了。
@@ -154,7 +168,11 @@ $
 
 通过执行上面的命令，可以发现，我们手动处理了 `SIGUSR1` 和 `SIGUSR2`，所以终端输出对应的处理信息。
 
+
+
 [*Unix Signal*](https://en.wikipedia.org/wiki/Unix_signal) /
 [*Handling unhandled exceptions and signals*](https://www.cocoawithlove.com/2010/05/handling-unhandled-exceptions-and.html) / 
 [*How to prevent iOS crash reporters from crashing MonoTouch apps?*](http://stackoverflow.com/questions/14499334/how-to-prevent-ios-crash-reporters-from-crashing-monotouch-apps/14499336#14499336)  /
-[*Avoiding Common Networking Mistakes*](https://developer.apple.com/library/content/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/CommonPitfalls/CommonPitfalls.html)
+[*Avoiding Common Networking Mistakes*](https://developer.apple.com/library/content/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/CommonPitfalls/CommonPitfalls.html) / 
+[*Mac OS X and iOS Internals*]() / 
+[*Kernel Programming Guide*](https://developer.apple.com/library/content/documentation/Darwin/Conceptual/KernelProgramming/About/About.html#//apple_ref/doc/uid/TP30000905-CH204-TPXREF101)

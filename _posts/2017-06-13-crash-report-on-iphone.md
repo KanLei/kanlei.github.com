@@ -280,9 +280,11 @@ Launch/Resume/Suspend/Quit 超时
 
 该日志信息与其它异常信息不同，主要由{进程信息、页使用情况、当前所有进程占用页数}组成。
 
-1 page = 4kb
+**注意**: 该崩溃无法直接捕获。
 
 当设备检测到低内存时，会发送 low memory 通知给运行中进程，如果内存仍然不够使用，系统会 kill 后台进程，如果内存依然不够使用，系统会 kill 当前使用的进程。
+
+1 page = 4kb
 
 [Out of Memory Terminations](https://docs.fabric.io/apple/crashlytics/OOMs.html)
 
@@ -300,14 +302,16 @@ EXC\_CRASH(SIGABRT)
 
 ### 三方崩溃报告组件
 
+崩溃报告组件通常是拦截程序中**未捕获异常**以及 **Signals** (low memory 崩溃除外)的方式获取 `NSException` 参数的 `callStackSymbols` 的属性所描述的调用栈信息。(在 App 中无法直接获取崩溃日志文件)
+
 [Fabric](https://docs.fabric.io/apple/crashlytics/overview.html)  
-[]()
+[CrashProbe](https://github.com/bitstadium/crashprobe)
 
 
-[Understanding and Analyzing Application Crash Reports](https://developer.apple.com/library/content/technotes/tn2151/_index.html) / 
-[Understanding Crash Reports on iPhone OS](https://developer.apple.com/videos/play/wwdc2010/317/) / 
-[Advanced Debugging and the Address Sanitizer](https://developer.apple.com/videos/play/wwdc2015/413/) / 
-[Analyzing Crash Reports](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/AnalyzingCrashReports/AnalyzingCrashReports.html) / 
-[Getting Crash Logs](https://developer.apple.com/library/content/qa/qa1747/_index.html) / 
-[Demystifying iOS Application Crash Logs](https://www.raywenderlich.com/23704/demystifying-ios-application-crash-logs) / 
-[iOS Crash Symbolication for dummies](https://www.bugsee.com/blog/ios-crash-symbolication-dummies-part-1/)
+[*Understanding and Analyzing Application Crash Reports*](https://developer.apple.com/library/content/technotes/tn2151/_index.html) / 
+[*Understanding Crash Reports on iPhone OS*](https://developer.apple.com/videos/play/wwdc2010/317/) / 
+[*Advanced Debugging and the Address Sanitizer*](https://developer.apple.com/videos/play/wwdc2015/413/) / 
+[*Analyzing Crash Reports*](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/AnalyzingCrashReports/AnalyzingCrashReports.html) / 
+[*Getting Crash Logs*](https://developer.apple.com/library/content/qa/qa1747/_index.html) / 
+[*Demystifying iOS Application Crash Logs*](https://www.raywenderlich.com/23704/demystifying-ios-application-crash-logs) / 
+[*iOS Crash Symbolication for dummies*](https://www.bugsee.com/blog/ios-crash-symbolication-dummies-part-1/)

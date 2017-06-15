@@ -99,9 +99,9 @@ Signals 是软中断(software interrupts)，提供了一种处理异步事件的
 
 打开 mac 上的 terminal，输入 `man signal` 可以查看 signal 定义描述以及 mac 支持 31 中不同的 signal。
 
-#### Signals 的生成
+#### iOS Signals
 
-Signals 主要源自**内核**、**进程自身**、**其它进程**，最终由**硬件**、 **kill** 和 **pthread_kill** 生成。
+iOS Signals 主要源自**内核**、**进程自身**、**其它进程**，最终由**硬件**、 **kill** 和 **pthread_kill** 生成。
 
 硬件、操作系统和用户生成的 Signals 会首先经过 [Mach](https://en.wikipedia.org/wiki/Mach_(kernel)) 层，转化为 Mach Exceptions，如果异常未被处理，会继续传递到 [BSD](https://developer.apple.com/library/content/documentation/Darwin/Conceptual/KernelProgramming/BSD/BSD.html) 层，由该层负责将 Exceptions 转化为 UNIX Signals。如果程序自身中的异常未被捕获，异常会最终转化为 Signals。
 

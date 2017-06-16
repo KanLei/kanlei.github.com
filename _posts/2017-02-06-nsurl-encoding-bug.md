@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "记一次 NSUrl 中文字符导致的 bug"
+title: "关于 url 中字符编码转换"
 description: ""
 category:
 tags: [Xamarin.iOS]
@@ -135,7 +135,10 @@ internal static string CheckBadChars(string name, bool isHeaderValue) {
 
 #### Base64
 
-[Base64](https://en.wikipedia.org/wiki/Base64#Examples) 算法的主要实现是通过将字符串内容转化为二进制的字节数组，接着通过按 6 位为一组进行划分，根据 Base64 索引表，将 6 位表示的值转化为对应的字符，最终得到转化后的字符串。在 .NET 中可以使用 `Convert.ToBase64String(byte[])` 和 `Convert.FromBase64String(string)` 来操作。
+[Base64](https://en.wikipedia.org/wiki/Base64#Examples) 算法的主要实现是通过将字符串内容转化为二进制的字节数组，接着通过按 6 位为一组进行划分，根据 Base64 索引表，将 6 位表示的值转化为对应的字符，最终得到转化后的字符串。由于 2 的 6 最多能表示 64 种位组合，而索引表刚好由 64 个值组成，所以 Base64 可以正确转换任何字符表示；ASCII 转化则无法表示超出 ASCII 表范围的字符。在 .NET 中可以使用以下方法来实现转换。
+ 
+> Convert.ToBase64String(byte[])  
+> Convert.FromBase64String(string)
 
 
 

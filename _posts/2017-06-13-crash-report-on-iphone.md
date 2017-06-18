@@ -256,8 +256,12 @@ Thread 0 Crashed:
 ...
 ```
 
-##### atos 手动符号化
+##### 手动符号化
 
+* symbolicatecrash
+* atos
+
+symbolicatecrash 所在位置 */Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash*
 
 
 [dSYM](https://stackoverflow.com/questions/22460058/how-is-a-dsym-file-created)
@@ -286,7 +290,8 @@ Launch/Resume/Suspend/Quit 超时
 
 1 page = 4kb
 
-[Out of Memory Terminations](https://docs.fabric.io/apple/crashlytics/OOMs.html)
+[Out of Memory Terminations](https://docs.fabric.io/apple/crashlytics/OOMs.html)  
+[Reducing FOOMs in the Facebook iOS app](https://code.facebook.com/posts/1146930688654547/reducing-fooms-in-the-facebook-ios-app/)
 
 ##### 4.Bugs
 

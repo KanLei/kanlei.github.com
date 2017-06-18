@@ -103,15 +103,13 @@ Signals 是软中断(software interrupts)，提供了一种处理异步事件的
 
 iOS Signals 主要源自**内核**、**进程自身**、**其它进程**，最终由**硬件**、 **kill** 和 **pthread_kill** 生成。
 
-硬件、操作系统和用户生成的 Signals 会首先经过 [Mach](https://en.wikipedia.org/wiki/Mach_(kernel)) 层，转化为 Mach Exceptions，如果异常未被处理，会继续传递到 [BSD](https://developer.apple.com/library/content/documentation/Darwin/Conceptual/KernelProgramming/BSD/BSD.html) 层，由该层负责将 Exceptions 转化为 UNIX Signals。如果程序自身中的异常未被捕获，异常会最终转化为 Signals。
-
-在 `Objective-C` 中通常使用 `NSUncaughtExceptionHandler` 和 `signal` 来定义默认的未捕获异常和信号处理机制，以便记录错误信息和保存数据。
-
+硬件、操作系统和用户生成的 Signals 会首先经过 [Mach](https://en.wikipedia.org/wiki/Mach_(kernel)) 层，转化为 Mach Exceptions，如果异常未被处理，会继续传递到 [BSD](https://developer.apple.com/library/content/documentation/Darwin/Conceptual/KernelProgramming/BSD/BSD.html) 层，由该层负责将 Exceptions 转化为 UNIX Signals。如果程序自身中的异常未被捕获，异常会传递给内核，最终通过内核将异常转化为 Signals 发送给当前触发异常的进程。
 
 ![hardware-generated signals]({{ site.url }}/assets/pictures/ios/hardware-generated-signals.png)
 
 ![software-generated signals]({{ site.url }}/assets/pictures/ios/software-generated-signals.png)
 
+在 `Objective-C` 中通常使用 `NSUncaughtExceptionHandler` 和 `signal` 来定义默认的未捕获异常和信号处理机制，以便记录错误信息和保存数据。
 
 #### Signals 使用方式
 

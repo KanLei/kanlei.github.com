@@ -170,6 +170,8 @@ $
 
 [*Unix Signal*](https://en.wikipedia.org/wiki/Unix_signal) /
 [*Handling unhandled exceptions and signals*](https://www.cocoawithlove.com/2010/05/handling-unhandled-exceptions-and.html) / 
+[*Unhandled exception handling in iOS and Android with Xamarin*](https://peterno.wordpress.com/2015/04/15/unhandled-exception-handling-in-ios-and-android-with-xamarin/) / 
+[*global try catch*](https://forums.xamarin.com/discussion/62142/global-try-catch) / 
 [*How to prevent iOS crash reporters from crashing MonoTouch apps?*](http://stackoverflow.com/questions/14499334/how-to-prevent-ios-crash-reporters-from-crashing-monotouch-apps/14499336#14499336)  /
 [*Avoiding Common Networking Mistakes*](https://developer.apple.com/library/content/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/CommonPitfalls/CommonPitfalls.html) / 
 [*Mac OS X and iOS Internals*]() / 

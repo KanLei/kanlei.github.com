@@ -120,7 +120,7 @@ tags: [Xamarin.iOS]
 
 *注意引用标记的写法，如 libz -> -lz，libbz2 -> -lbz2*
 
-**生成项目并修复编译错误**
+###生成项目并修复编译错误
 
 *Cannot create an instance of ... because it is an abstract class*
 
@@ -129,6 +129,9 @@ tags: [Xamarin.iOS]
  *Attempting to JIT compile method*
  
  > 如果在调用绑定库中实例方法时出现该错误，需要打开项目配置的 [*iOS Build* -> *Linker behavior* 改为 *Dont't Link* 即可](https://forums.xamarin.com/discussion/2184/attempting-to-jit-compile-method)。如果你只是想移除特定引用程序集的 *linker*，在 *AssemblyInfo* 文件中将 *[assembly: LinkerSafe]* 标记删除即可。
+ 
+[*interface 与 protocol 重名*](https://forums.xamarin.com/discussion/31684/binding-when-a-protocol-has-the-same-name-as-a-class-implementing-it)  
+[*QuartzCore 引用*](https://stackoverflow.com/questions/14734102/quartzcore-framework-for-mono-develop)
  
 [*Linking in iOS*](https://developer.xamarin.com/guides/ios/advanced_topics/linker/)   
 [*Custom Linker Configuration*](https://developer.xamarin.com/guides/cross-platform/advanced/custom_linking/)  
@@ -140,4 +143,4 @@ tags: [Xamarin.iOS]
 #### 附
 [C# 与 Objective-C](https://developer.xamarin.com/guides/ios/advanced_topics/xamarin_for_objc/) /
 [Events, Protocol and Delegates](https://developer.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events/) /
-[Binding Objective-C](https://developer.xamarin.com/guides/cross-platform/macios/binding/)
+[Binding Objective-C](https://developer.xamarin.com/guides/cross-platform/macios/binding/) / [Binding vs Converting](http://pierceboggan.tumblr.com/page/2) / [Binding iOS libraries in Xamarin](http://www.jimbobbennett.io/binding-ios-libraries-in-xamarin/) / [Diving into Xamarin: Reusing Objective-C Libraries](https://medium.com/xamarin-development/diving-into-xamarin-reusing-objective-c-libraries-18b6f29c7922) / [Creating a Static Library in iOS Tutorial](https://www.raywenderlich.com/41377/creating-a-static-library-in-ios-tutorial) / [Creating Xamarin.iOS bindings for a native library](http://kannan-chandra.com/posts/xamarin-binding-appsee/) / [Specify extra GCC flags](http://ipixels.net/blog/specify-extra-gcc-flags-for-native-library-binding-in-xamarin-ios/)

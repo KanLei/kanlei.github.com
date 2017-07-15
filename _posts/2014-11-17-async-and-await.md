@@ -46,6 +46,17 @@ public async Task MyMethodAysnc()
 
 使用 `async` 的标准规范是 **async all the way**，但是当主方法无法使用 `async` 关键字时，如 `static void Main()`，这时我们可以定义一个中间方法，这个中间方法的返回值为 `Task`，因此在主方法中调用该中间方法而不去 `await` 它。但是，这会引发另外一个问题，该中间方法的后续代码会被提前执行，由于我们没有显示地等待中间方法执行结束，我们可以使用 `Wait()` 或者 `Result` 方式，但这种做法会阻塞线程，且容易造成死锁。另一种方式是显示地使用 `Task` 手动创建一个任务并执行它，但由于我们显示地创建 `Task`，所有发生在 `Task` 中的异常都无法被抛出，因此我们需要在 `Task` 的执行方法中显示地使用 `try/catch` 进行异常捕获。[getting start with async await](https://blog.xamarin.com/getting-started-with-async-await/)
 
+### TaskScheduler
+
+TaskScheduler 提供了获取 Scheduler 的三种方式：
+
+- Current: 获取 `ThreadPoolTaskScheduler`
+- Default: `获取 ThreadPoolTaskScheduler`
+- FromCurrentSynchronizationContext (): 只能从 UI 线程中调用并得到包含 `SynchronizationContext.Current` 的 `SynchronizationContextTaskScheduler`，从非 UI 线程获取会触发异常
+
+在使用 `Task.Factory.StartNew` 时，我们可以指定 `TaskScheduler`。通常应该[优先考虑](http://blog.stephencleary.com/2013/08/startnew-is-dangerous.html)使用 `Task.Run`。
+
+我们也可以定义自己的 [TaskScheduler](https://msdn.microsoft.com/en-us/library/ee789351(v=vs.100).aspx)。
 
 ### 上下文
 
@@ -63,9 +74,11 @@ public async Task MyMethodAysnc()
 // 使用线程池线程
 await DownloadAsync("http://...").ConfigAwait(false);
 ```
-执行不进行 UI 操作的异步方法应该使用 `ConfigAwait(false)` 来提升性能，特别是类库中异步方法。 `await` 的方法立即执行结束时，此如果时该方法还未捕获当前同步上下文，因此执行在 UI 线程上，所以后续方法仍需要执行 `ConfigAwait(false)` 避免捕获同步上下文。
+执行不进行 UI 操作的**所有**异步方法应该使用 `ConfigAwait(false)` 来提升性能，特别是类库中异步方法。 
+之所以是**所有**，是因为：
 
-每个方法的执行上下文是独立的，因此如果 A -> B, 在 B 中使用 `ConfigAwait(false)` 后，B 中剩余的方法在线程池线程上执行，而 A 中的剩余方法仍然在 UI 线程中执行。
+- 当 `await` 的方法立即执行结束时，此时该方法仍执行在 UI 线程上，后续方法依然需要配置 `ConfigAwait(false)` 才能避免捕获同步上下文。
+- 每个方法的上下文捕获是独立的，如 A -> B, 在 B 中使用 `ConfigAwait(false)` 后，B 中剩余的方法在线程池线程上执行，而 A 中的剩余方法仍然在 UI 线程中执行。
 
 #### 执行上下文
 
@@ -161,6 +174,7 @@ private struct HttpLengthSM: IAsyncStateMachine
 > Avoid unnecessary awaits.
 
 
+[*Parallel Programming in .NET Framework 4*](https://blogs.msdn.microsoft.com/csharpfaq/2010/06/01/parallel-programming-in-net-framework-4-getting-started/) / 
 [*Why use async await*](https://msdn.microsoft.com/en-us/magazine/hh456403.aspx) / 
 [*Asynchronous Programming*](http://msdn.microsoft.com/en-us/library/hh191443(v=vs.110).aspx) / 
 [*Scott Hanselman*](http://www.hanselman.com/blog/TheMagicOfUsingAsynchronousMethodsInASPNET45PlusAnImportantGotcha.aspx) / 

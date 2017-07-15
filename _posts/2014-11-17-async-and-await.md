@@ -22,7 +22,7 @@ public async Task<string> DownloadAsync(string url)
 }
 ```
 
-上面的代码中，当方法执行到 `client.GetStringAsync(url)` 时会异步执行 `GetStringAsync`，并立即返回一个 `Task<stirng>` 对象给 `content`，方法继续执行，直到遇到 `await` 后， 如果 `content` 还未完成，则立即返回给方法的调用者，并开启一个新的线程执行后续代码（即方法体中的剩余代码，如果 `await` 处于是循环体内，那下一次循环就是使用线程池线程来执行）；如果可以立即获得结果，会继续在主线程执行方法体中剩余的代码并返回，方法调用者获取 `Task<string>` 对象后，可以继续往下执行，从而避免了主线程被阻塞，从而实现我们所需要的异步效果；也可以调用 `Wait()` 方法阻塞主线程，直到获取结果。
+上面的代码中，当方法执行到 `client.GetStringAsync(url)` 时会异步执行 `GetStringAsync`，并立即返回一个 `Task<stirng>` 对象给 `content`，方法继续执行，直到遇到 `await` 后， 如果 `content` 还未完成，则立即返回给方法的调用者，并开启一个新的线程执行后续代码（即方法体中的剩余代码，包括在循环体内）；如果可以立即获得结果，会继续在主线程执行方法体中剩余的代码并返回，方法调用者获取 `Task<string>` 对象后，可以继续往下执行，从而避免了主线程被阻塞，从而实现我们所需要的异步效果。
 
 ### 自定义 async 方法
 
@@ -44,17 +44,17 @@ public async Task MyMethodAysnc()
 
 > 注意 `async lambda` 要使用 `Func<Task>` 作为类型，因为 `Action` 类型默认返回值为 `void`，会导致异常无法被正常捕获。
 
-使用 `async` 的标准规范是 **async all the way**，但是当主方法无法使用 `async` 关键字时，如 `static void Main()`，这时我们可以定义一个中间方法，这个中间方法的返回值为 `Task`，因此在主方法中调用该中间方法而不去 `await` 它。但是，这会引发另外一个问题，该中间方法的后续代码会被提前执行，由于我们没有显示地等待中间方法执行结束，我们可以使用 `Wait()` 或者 `Result` 方式，但这种做法会阻塞线程，且容易造成死锁。另一种方式是显示地使用 `Task` 手动创建一个任务并执行它，但由于我们显示地创建 `Task`，所有发生在 `Task` 中的异常都无法被抛出，因此我们需要在 `Task` 的执行方法中显示地使用 `try/catch` 进行异常捕获。[getting start with async await](https://blog.xamarin.com/getting-started-with-async-await/)
+使用 `async` 的标准规范是 **async all the way**，但是当主方法无法使用 `async` 关键字时，如 `static void Main()`，这时我们可以定义一个中间方法，这个中间方法的返回值为 `Task`，因此在主方法中调用该中间方法而不去 `await` 它。但是，这会引发另外一个问题，该中间方法的后续代码会被提前执行，由于我们没有显示地等待中间方法执行结束，我们可以使用 `Wait()` 或者 `Result` 方式，但这种做法会阻塞线程，且容易造成死锁。一种方式是在 `Task` 上调用 `ContinueWith` 方法，并通过指定 `TaskContinuationOptions` 的 `OnlyOnRanToCompletion` 和 `OnlyOnFaulted` 来处理任务完成或失败的情况；另一种方式是显示地使用 `Task` 手动创建一个任务并执行它，但由于我们显示地创建 `Task`，所有发生在 `Task` 中的异常都无法被抛出，因此我们需要在 `Task` 的执行方法中显示地使用 `try/catch` 进行异常捕获。[getting start with async await](https://blog.xamarin.com/getting-started-with-async-await/)
 
 ### TaskScheduler
 
 TaskScheduler 提供了获取 Scheduler 的三种方式：
 
 - Current: 获取 `ThreadPoolTaskScheduler`
-- Default: `获取 ThreadPoolTaskScheduler`
+- Default: 获取 `ThreadPoolTaskScheduler`
 - FromCurrentSynchronizationContext (): 只能从 UI 线程中调用并得到包含 `SynchronizationContext.Current` 的 `SynchronizationContextTaskScheduler`，从非 UI 线程获取会触发异常
 
-在使用 `Task.Factory.StartNew` 时，我们可以指定 `TaskScheduler`。通常应该[优先考虑](http://blog.stephencleary.com/2013/08/startnew-is-dangerous.html)使用 `Task.Run`。
+在使用 `Task.Factory.StartNew` 时，我们可以指定 `TaskScheduler`，指定任务调度所在的线程。通常应该[优先考虑](http://blog.stephencleary.com/2013/08/startnew-is-dangerous.html)使用 `Task.Run`。
 
 我们也可以定义自己的 [TaskScheduler](https://msdn.microsoft.com/en-us/library/ee789351(v=vs.100).aspx)。
 

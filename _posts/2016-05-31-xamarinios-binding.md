@@ -58,7 +58,7 @@ tags: [Xamarin.iOS]
 **生成 .a 文件**
 打开 Xcode，File -> New -> Project -> iOS -> Framework & Library -> Cocoa Touch Static Library -> 输入项目名称（如 Test） -> Create。
 
-选中 Test 文件夹右击 Move To Trash，将需要生成的 OC 源代码拖到 Test 项目所在面板下，在弹出的提示框中选择 Copy items if needed、Create groups 和 Add to targets:勾选 Test。
+选中 Test 文件夹右击 Move To Trash，将需要生成的 OC 源代码拖到 Test 项目所在面板下，在弹出的提示框中选择 Copy items if needed、Create groups 和 Add to targets:勾选 Test。[**资源文件不需要添加到静态类库中，添加到最后完成的绑定库中**]
 
 选中 Project 一栏下的 Test 项目，在 Info 选项卡中选择要部署的目标平台 iOS Deployment Target。
 
@@ -103,7 +103,7 @@ tags: [Xamarin.iOS]
 
 打开 Xamarin Studio -> New Solution -> iOS(Library) -> Bindings Library，输入 Project Name:TestBinding.iOS 和 Solution Name:TestBinding，Create。
 
-接着将我们上节中生成的 `ApiDefinition.cs` 和 `StructsAndEnum.cs` 中的代码分别复制并粘贴到对应的文件中。~~将生成的 C.a 文件拖放到 TestBinding.iOS 项目上，并选择复制到项目。这时我们会看到 Xamarin Studio 会自动帮我们生成了 C.linkwith.cs 文件，我们需要手动修改该文件，增加绑定过程中需要的参数配置信息。~~ 上面这种方式已被弃用，新的方式是使用 **NativeReference** 并在属性配置栏中完成以下相关配置。
+接着将我们上节中生成的 `ApiDefinition.cs` 和 `StructsAndEnum.cs` 中的代码分别复制并粘贴到对应的文件中。~~将生成的 C.a 文件拖放到 TestBinding.iOS 项目上，并选择复制到项目。这时我们会看到 Xamarin Studio 会自动帮我们生成了 C.linkwith.cs 文件，我们需要手动修改该文件，增加绑定过程中需要的参数配置信息。~~ 上面这种方式已被弃用，新的方式是使用 **NativeReference** 并在属性配置栏中完成以下相关配置。[**首先将生成的库拷贝到项目根目录下，接着通过 NativeReference 引用；新建 Resources 文件夹，将资源文件添加到该目录下**]
 
 **LinkTarget** 表示生成的库支持的架构，通过我们会指定
 > `LinkTarget.ArmV7|LinkTarget.ArmV7s|`  
@@ -129,6 +129,14 @@ tags: [Xamarin.iOS]
  *Attempting to JIT compile method*
  
  > 如果在调用绑定库中实例方法时出现该错误，需要打开项目配置的 [*iOS Build* -> *Linker behavior* 改为 *Dont't Link* 即可](https://forums.xamarin.com/discussion/2184/attempting-to-jit-compile-method)。如果你只是想移除特定引用程序集的 *linker*，在 *AssemblyInfo* 文件中将 *[assembly: LinkerSafe]* 标记删除即可。
+ 
+ *ObjCRuntime.Messaging.IntPtr_objc_msgSend*
+ 
+> 如果出现发送消息的错误，首先应检查调用处的方法签名是否与 OC 中方法签名一致。
+ 
+ *Could not create an native instance of the type 'TypeName': the native class hasn't been loaded*
+ 
+> 出现不能创建实例的错误，首先考虑创建实例的过程中是否使用扩展方法(即 OC 中的 Category)，如果存在，则需要在引用的 library 属性栏 Linker Flags 添加 -ObjC。
  
 [*interface 与 protocol 重名*](https://forums.xamarin.com/discussion/31684/binding-when-a-protocol-has-the-same-name-as-a-class-implementing-it)  
 [*QuartzCore 引用*](https://stackoverflow.com/questions/14734102/quartzcore-framework-for-mono-develop)

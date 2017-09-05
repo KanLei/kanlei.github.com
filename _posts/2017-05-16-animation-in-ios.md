@@ -26,6 +26,8 @@ tags: [animation]
 
 当动画执行结束后，如果要保留动画的最后一帧在视图上，需要同时设置 `isRemovedOnCompletion = false` 和 `fillMode = kCAFillModeForwards` 或 `fillMode = kCAFillModeBoth`
 
+> 由于上面提到动画的是 `Presentation Layer`，因此保留动画的最后一帧时，当前显示视图并不是真实的视图，因此失去交互性，无法进行如激活输入框等操作
+
 #### CAAnimationDelegate
 
 使用 `UIKit` 动画，你无法在创建动画之后，暂停、结束甚至访问它；而使用 **Core Animation**，你可以很容易的结束一个动画，甚至可以为动画设置一个委托，观察动画执行的状态。
@@ -40,6 +42,8 @@ tags: [animation]
 timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
 ```
 也可以通过 `CAMediaTimingFunction(controlPoints...)` 构造来自定义缓冲点。
+
+> 缓入：由慢到快；缓出：由快到慢；缓入缓出：由慢到快再到慢；
 
 #### More timing options
 

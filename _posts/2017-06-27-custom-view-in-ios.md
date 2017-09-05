@@ -91,9 +91,9 @@ public XLabel (IntPtr handle) : base (handle)
 
 关于 `IntPtr` 的解释如下
 > The IntPtr constructor is required for Objective-C to create instances of managed types used in storyboards/xibs, and if you're missing the IntPtr constructor you'll get **Could not find an existing managed instance for this object, nor was it possible to create a new managed instance** exception.
-
 如果我们同时提供了 `initWithCoder:` 和 `IntPtr` 的构造方式，默认 `initWithCoder:` 会被调用，否则只会调用提供的那种方式。
 
 关于使用 `initWithCoder:` 方式的[兼容性建议](http://kanlei.github.io/article/2016/06/25/improve-ios-9-compatibility)
 
-[*Nib*](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/LoadingResources/CocoaNibs/CocoaNibs.html)
+[*Nib*](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/LoadingResources/CocoaNibs/CocoaNibs.html) / 
+[*IntPtr Constructor*](https://developer.xamarin.com/guides/ios/under_the_hood/api_design/#Types_and_Interface_Builder)

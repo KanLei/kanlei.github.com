@@ -25,7 +25,7 @@ interface IEnumerator: IDisposable
 
 ```
 
-上面是我们实现 `C#` 中迭代器的接口定义，我们需要不断的调用 `MoveNext()` 并根据其返回值决定是否调用 `Current` 属性。这是**拉模型**的实现方式，我们需要主动去请求并获取数据。
+上面是实现 `C#` 中迭代器的接口定义，我们需要不断的调用 `MoveNext()` 并根据其返回值决定是否调用 `Current` 属性。这是**拉模型**的实现方式，需要主动去请求并获取数据。
 
 其对应的**推模型**接口定义如下：
 
@@ -43,17 +43,17 @@ interface IObserver
 }
 ```
 
-**推模型**完全实现了**拉模型**的所有功能，只不过我们不再需要去主动请求并获取数据，而是只需订阅推送，当新消息出现时，会自动通知我们。这种模型使我们极大地改善了诸如异步回调，并发，异常处理等编程方式，我们无需再因为冗长的嵌套方式而导致[回调地狱](http://callbackhell.com/)，也无需再担心数据状态是否被并发所破坏，以及因没有及时处理异常导致程序崩溃。因 `ReactiveX` 的这种特性，也被简单地概括为**异步的数据流**。
+**推模型**完全实现了**拉模型**的所有功能，只不过我们不再需要去主动请求并获取数据，而是订阅推送，当新消息出现时，会自动通知我们。这种模型极大地改善了诸如异步回调，并发，异常处理等编程方式，不再因为冗长的嵌套方式而导致[回调地狱](http://callbackhell.com/)，也无需担心数据状态是否被并发所破坏，以及异常的流式处理。`ReactiveX` 的这种特性，也被简单地概括为**异步的数据流**。
 
 ### 关键概念
 
 学习 Rx，我们需要从 `IObservable` 和 `Subscribe` 开始，即如何得到一个可观测对象和如何获取通知。
 
-#### 如果得到 IObservable
+#### 如何得到 IObservable
 
 #### 如何获取通知
 
-### 应用场景演示
+### ReactiveUI 应用场景演示
 
 ##### 方便取消注册事件，解决内存泄露
 
@@ -65,8 +65,7 @@ this.WhenAnyValue(v => v.TextField.Text).Subscribe(x => { }).DisposeWith(bag);
 
 bag 类型是 `CompositeDisposable`，通过将不同的订阅添加到 bag 中，可以很方便让我们对资源释放做统一处理。将观察操作放置到 `ViewWillAppear` 方法中，将释放操作 `bag.Clear()` 放置到 `ViewWillDisappear` 中，避免由于循环引用会导致 `Dispose(bool)` 方法不被调用。
 
-
-### ReactiveUI
+> 通过 WhenAnyValue 检测 TextField 文本变化时需注意：手动通过代码改变文本不会触发该通知；可以使用 FromEventPattern 订阅 EditingChanged 事件 + TextField.SendActionForControlEvents(UIControlEvent.EditingChanged) 来实现最终效果。
 
 
 

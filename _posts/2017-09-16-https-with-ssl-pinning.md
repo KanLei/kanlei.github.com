@@ -58,11 +58,13 @@ HTTP 协议在通信过程中的三个缺点：
 
 首先在终端中输入命令获取 www.baidu.com 的公钥
 
-> openssl s_client -connect www.baidu.com:443 | openssl x509 -pubkey -noout
+```
+openssl s_client -connect www.baidu.com:443 | openssl x509 -pubkey -noout
+```
  
 得到
 
-> -----BEGIN PUBLIC KEY-----
+> -----BEGIN PUBLIC KEY-----  
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
 MIIBCgKCAQEAyJkPC0Lev6L0shNY3OTO  
 ......  

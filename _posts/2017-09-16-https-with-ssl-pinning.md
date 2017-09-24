@@ -13,7 +13,7 @@ tags: []
 
 HTTP 协议在通信过程中的三个缺点：
 
-* 信息采用明文传入，无法保证隐私性
+* 信息采用明文传输，无法保证隐私性
 * 信息易被篡改，无法保证其完整性
 * 无法验证通信双方的身份
 
@@ -37,7 +37,7 @@ HTTP 协议在通信过程中的三个缺点：
 
 ### 为什么使用 SSL Pinning ？
 
-虽然 HTTPS 采用了公钥和证书的加密和验证方式，但依然存在 MIM(中间人攻击)的可能性，因为证书颁发结构可能被黑客入侵，而 HTTPS 只验证了证书的合法性，**并没有验证当前服务器是否是我们要访问的服务器**。
+虽然 HTTPS 采用了公钥和证书的加密和验证方式，但依然存在 MIM(中间人攻击)的可能性，因为证书颁发机构可能被黑客入侵，而 HTTPS 只验证了证书的合法性，**并没有验证当前服务器是否是我们要访问的服务器**。
 
 为了保证我们当前访问的服务器就是我们需要访问的服务器，需要通过 SSL Pinning 的方式来实现，其包括 Certificate Pinning 和 Public Key Pinning 两种。
 
@@ -54,7 +54,34 @@ HTTP 协议在通信过程中的三个缺点：
 
 ### 应用实践
 
+以 Xamarin 结合 HttpClient，验证 www.baidu.com 为例:
 
+首先在终端中输入命令获取 www.baidu.com 的公钥
+
+> openssl s_client -connect www.baidu.com:443 | openssl x509 -pubkey -noout
+ 
+得到
+
+> -----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
+MIIBCgKCAQEAyJkPC0Lev6L0shNY3OTO  
+......  
+-----END PUBLIC KEY-----
+
+拷贝 Begin/End 之间的字符串并保存到 `PublicKey` 变量中，**MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A** 除外，由于该串字符表示加密算法(**1.2.840.113549.1.1.1**)可通过 `GetKeyAlgorithm()`可获取，而 `GetPublicKey()` 获取除算法标识外的公钥。
+
+接着在 `AppDelegate` 的 `FinishedLaunching` 方法中设置如下
+
+```csharp
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
+{
+    byte[] keyBytes = certificate.GetPublicKey();
+    string remotePublicKey = Convert.ToBase64String(keyBytes);
+
+    return PublicKey == remotePublicKey;
+};
+```
 
 
 [*Pinning Cheat Sheet*](https://www.owasp.org/index.php/Pinning_Cheat_Sheet)  

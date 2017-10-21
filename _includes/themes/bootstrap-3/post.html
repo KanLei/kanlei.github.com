@@ -1,3 +1,5 @@
+<!-- Post 页面 -->
+
 <div class="page-header">
   <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
 </div>
@@ -27,8 +29,8 @@
     </ul>
   {% endunless %}  
   
-    <hr>
-    <ul class="pagination">
+    <!-- <hr> -->
+   <!--  <ul class="pagination">
     {% if page.previous %}
       <li class="prev"><a href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&laquo; Previous</a></li>
     {% else %}
@@ -42,6 +44,6 @@
     {% endif %}
     </ul>
     <hr>
-    {% include JB/comments %}
+    {% include JB/comments %} -->
   </div>
 </div>

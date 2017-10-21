@@ -1,30 +1,34 @@
 
 body {
-    font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
     font-size: 18px;
-    margin: 5% 20% 5% 20%;
     padding: 0% 5% 5% 5%;
-    width: 50%;
-    line-height: 150%;
-    border: 1px solid LightGrey;
+    background-color: white;
+
+    font-family: "Palatino Linotype", FreeSerif, serif;
+    line-height: 1.5;
+    margin: 0 auto; 
+    max-width: 48em;
+    text-align: justify;
+    counter-reset: section;
+    word-wrap: break-word;
 }
 
 @media(min-width:600px) and (max-width:900px) {
     body {
-        font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+        font-family: "Palatino Linotype", FreeSerif, serif;
         font-size: 17px;
         /*margin: 3% 7% 5% 10%;*/
         margin: 5% 10% 5% 15%;
         padding: 0% 5% 5% 5%;
         width: 65%;
         line-height: 150%;
-        border: 1px solid LightGrey;
+        /*border: 1px solid LightGrey;*/
     }
 }
 
 @media(max-width:599px) {
     body {
-        font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+        font-family: "Palatino Linotype", FreeSerif, serif;
         font-size: 17px;
         /*margin: 3% 7% 5% 10%;*/
         margin: 5% 5% 5% 5%;
@@ -59,41 +63,48 @@ nav {
     }
 }
 
+/*首页文章列表样式*/
+ul.posts {
+    color: white;
+    line-height: 1.8;
+    text-align:left;
+}
+
 H1 {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    font-family: "Palatino Linotype", FreeSerif, serif;
     line-height: 110%;
 }
 
 H2 {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    font-family: "Palatino Linotype", FreeSerif, serif;
     margin-bottom: 40px;
     padding: 5px;
-    border-bottom: 2px LightGrey solid;
+    /*border-bottom: 2px LightGrey solid;*/
     width: 90%;
     line-height: 150%;
-    color: #666666;
+    /*color: #666666;*/
 }
 
 
 H3 {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    font-family: "Palatino Linotype", FreeSerif, serif;
     margin-top: 40px;
     margin-bottom: 30px;
-    border-bottom: 1px LightGrey solid;
+    /*border-bottom: 1px LightGrey solid;*/
     width: 80%;
     line-height: 150%;
-    color: #666666;
+    /*color: #666666;*/
 }
 
 
 H4 {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    font-family: "Palatino Linotype", FreeSerif, serif;
     margin-top: 40px;
     margin-bottom: 30px;
-    border-bottom: 1px LightGrey solid;
+    /*border-bottom: 1px LightGrey solid;*/
     width: 80%;
     line-height: 150%;
-    color: #666666;
+    /*color: #666666;*/
 }
 
 
@@ -110,30 +121,29 @@ blockquote {
 
 
 pre {
-    white-space: pre-wrap;
-    font-family: Source Code Pro, Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
-    font-size: 80%;
-    border: solid 1px lightgray;
-    -moz-border-radius: 3px; /* Gecko browsers */
-    -webkit-border-radius: 3px; /* Webkit browsers */
-    border-radius: 3px; /* W3C syntax */
-    /*background-color: Ivory;*/
-    padding: 5px;
-    line-height: 130%;
-    margin-left: 20px;
-    width: 95%;
+    border: 1px solid #d6d6d6;
+    background-color: #F9FAFA;
+    margin-bottom: 1.5em;
+    padding: 20px 30px 20px;
+    white-space: pre;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    word-wrap: normal;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    -webkit-tab-size: 4;
+    -ms-tab-size: 4;
+    tab-size: 4;
 }
 
 @media(max-width:767px) {
     pre {
         white-space: pre-wrap;
-        font-family: Source Code Pro, Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
-        font-size: 80%;
-        border: solid 1px lightgrey;
-        -moz-border-radius: 3px; /* Gecko browsers */
-        -webkit-border-radius: 3px; /* Webkit browsers */
-        border-radius: 3px; /* W3C syntax */
-        /*background-color: Ivory;*/
+        /*font-size: 80%;*/
+        border: 1px solid #d6d6d6;
+        background-color: #F9FAFA;
         padding: 5px;
         line-height: 130%;
         margin-left: 10px;
@@ -142,8 +152,10 @@ pre {
 }
 
 code {
-    font-family: Source Code Pro, Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
-    font-size: 90%;
+    font: 14px/1.8em menlo, monospace;
+    color: #000;
+    -webkit-font-smoothing: auto;
+    white-space: inherit;
 }
 
 
@@ -197,7 +209,7 @@ hr {
 }
 
 table {
-    font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
+    font-family: "Palatino Linotype", FreeSerif, serif;
     font-size: 80%;
     border: solid 1px LightBlue;
     -moz-border-radius: 3px; /* Gecko browsers */

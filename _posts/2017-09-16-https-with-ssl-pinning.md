@@ -91,4 +91,6 @@ ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, 
 [*Certificate and Public Key Pinning with Xamarin*](https://thomasbandt.com/certificate-and-public-key-pinning-with-xamarin)   
 [*Certificate Pinning*](https://talk.objc.io/episodes/S01E57-certificate-pinning)  
 [*Increasing your trust certificate pinning on iOS*](https://fastchicken.co.nz/2016/03/21/increasing-your-trust-certificate-pinning-on-ios/)  
-[*RSA Key Formats*](https://www.cryptosys.net/pki/rsakeyformats.html)
+[*RSA Key Formats*](https://www.cryptosys.net/pki/rsakeyformats.html)  
+[*Transform Public Key Format*](https://stackoverflow.com/questions/18039401/how-can-i-transform-between-the-two-styles-of-public-key-format-one-begin-rsa)  
+[*openssl*](https://www.madboa.com/geek/openssl/)

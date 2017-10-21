@@ -8,12 +8,15 @@ body {
     line-height: 1.5;
     margin: 0 auto; 
     max-width: 48em;
-    text-align: justify;
+    text-align: left;
     counter-reset: section;
     word-wrap: break-word;
 }
 
 @media(min-width:600px) and (max-width:900px) {
+        h1 {
+        font-size: 27px;
+    }
     body {
         font-family: "Palatino Linotype", FreeSerif, serif;
         font-size: 17px;
@@ -27,6 +30,9 @@ body {
 }
 
 @media(max-width:599px) {
+    h1 {
+        font-size: 22px;
+    }
     body {
         font-family: "Palatino Linotype", FreeSerif, serif;
         font-size: 17px;
@@ -43,18 +49,16 @@ nav {
     position: fixed;
     border: solid 1px LightGray;
     opacity: 0.9;
-    /*height: 9%;*/
     height:60px;
-    width: 99%;
+    width: 100%;
     top: 0%;
-    left: 0.5%;
-    border-radius: 3px; /* W3C syntax */
+    left: 0%;
 }
 
-    nav div {
-        margin-left: 45%;
-        margin-top: 15px;
-    }
+nav div {
+    text-align:center;
+    margin-top: 15px;
+}
 
 @media(max-width:599px) {
     nav div {
@@ -70,40 +74,40 @@ ul.posts {
     text-align:left;
 }
 
-H1 {
+h1 {
     font-family: "Palatino Linotype", FreeSerif, serif;
     line-height: 110%;
 }
 
-H2 {
+h2 {
     font-family: "Palatino Linotype", FreeSerif, serif;
     margin-bottom: 40px;
     padding: 5px;
     /*border-bottom: 2px LightGrey solid;*/
     width: 90%;
-    line-height: 150%;
+    line-height: 120%;
     /*color: #666666;*/
 }
 
 
-H3 {
+h3 {
     font-family: "Palatino Linotype", FreeSerif, serif;
     margin-top: 40px;
     margin-bottom: 30px;
     /*border-bottom: 1px LightGrey solid;*/
     width: 80%;
-    line-height: 150%;
+    line-height: 120%;
     /*color: #666666;*/
 }
 
 
-H4 {
+h4 {
     font-family: "Palatino Linotype", FreeSerif, serif;
     margin-top: 40px;
     margin-bottom: 30px;
     /*border-bottom: 1px LightGrey solid;*/
     width: 80%;
-    line-height: 150%;
+    line-height: 110%;
     /*color: #666666;*/
 }
 

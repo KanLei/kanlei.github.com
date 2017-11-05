@@ -93,4 +93,5 @@ ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, 
 [*Increasing your trust certificate pinning on iOS*](https://fastchicken.co.nz/2016/03/21/increasing-your-trust-certificate-pinning-on-ios/)  
 [*RSA Key Formats*](https://www.cryptosys.net/pki/rsakeyformats.html)  
 [*Transform Public Key Format*](https://stackoverflow.com/questions/18039401/how-can-i-transform-between-the-two-styles-of-public-key-format-one-begin-rsa)  
+[*Creating Certificates for TLS Testing*](https://developer.apple.com/library/content/technotes/tn2326/_index.html#//apple_ref/doc/uid/DTS40014136)  
 [*openssl*](https://www.madboa.com/geek/openssl/)

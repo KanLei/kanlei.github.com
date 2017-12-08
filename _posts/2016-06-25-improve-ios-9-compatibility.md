@@ -25,6 +25,19 @@ public TestTableViewCell (UITableViewCellStyle style, NSString reuseIdentifier)
 }
 ```
 
+#### UITableViewHeaderFooterView
+
+当我们使用 `RegisterClassForHeaderFooterViewReuse` 注册 `HeaderFooterView`，用 `DequeueReusableHeaderFooterView` 获取 `HeaderFooterView `， 如果此时 `HeaderFooterView ` 需要构造则默认会调用 `initWithReuseIdentifier:` 方法创建
+
+```c#
+[Export("initWithReuseIdentifier:")]
+public AddAddressSectionHeader(NSString reuseIdentifier) : base(reuseIdentifier)
+{
+
+}
+```
+
+
 #### UICollectionViewCell
 
 当我们使用 `RegisterClassForCellReuse` 注册 `Cell`，用 `DequeueReusableCell` 获取 `Cell`， 如果此时 `Cell` 需要构造则默认会调用 `initWithFrame:` 方法创建
@@ -37,6 +50,8 @@ public TestCollectionViewCell (CGRect frame)
 
 }
 ```
+
+可以通过基类实现查看更多 `Export` 的方法。
 
 ## 以 xib + cs 构造
 

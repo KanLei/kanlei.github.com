@@ -31,6 +31,15 @@ HTTP 协议在通信过程中的三个缺点：
 
 认证过程主要通过可信任的第三方结构颁发的证书来确认身份，如 CA 颁发证书给指定的服务器，客户端(如，浏览器或手机)中提前内置了可信任的 CA 颁发的公钥，当客户端访问支持 HTTPS 的服务端时，会首先根据公钥验证服务端证书的合法性，如果验证通过，则证明该服务器是合法的服务器。(2011.7 DigiNotar 曾被黑客入侵，并发布了伪造的可信任证书)
 
+证书遵循  [X.509 specification](http://www.itu.int/rec/T-REC-X.509)，包含如以下内容：
+
+* 服务端的公钥
+* 服务端的名称
+* 证书发起方的名臣
+* ......
+
+证书内容通过私钥签名后分发给客户端，客户端通过公钥验证证书内容的合法性。
+
 #### 信息完整性
 
 通过对消息摘要进行哈希计算，将得到的哈希值存储到消息体中发送给服务器，服务器接收到消息后，对消息摘要再次进行哈希运算，将计算结果与消息体中的哈希值对比，检验消息是否在传输过程中被篡改。
@@ -90,7 +99,8 @@ ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, 
 [*SSL Certificate Pinning in mobile applications*](https://www.bugsee.com/blog/ssl-certificate-pinning-in-mobile-applications/)  
 [*Certificate and Public Key Pinning with Xamarin*](https://thomasbandt.com/certificate-and-public-key-pinning-with-xamarin)   
 [*Certificate Pinning*](https://talk.objc.io/episodes/S01E57-certificate-pinning)  
-[*Increasing your trust certificate pinning on iOS*](https://fastchicken.co.nz/2016/03/21/increasing-your-trust-certificate-pinning-on-ios/)  
+[*Increasing your trust certificate pinning on iOS*](https://fastchicken.co.nz/2016/03/21/increasing-your-trust-certificate-pinning-on-ios/) 
+[*Public-Key Cryptography and Certificates*](http://chimera.labs.oreilly.com/books/1234000001708/apg.html)  
 [*RSA Key Formats*](https://www.cryptosys.net/pki/rsakeyformats.html)  
 [*Transform Public Key Format*](https://stackoverflow.com/questions/18039401/how-can-i-transform-between-the-two-styles-of-public-key-format-one-begin-rsa)  
 [*Creating Certificates for TLS Testing*](https://developer.apple.com/library/content/technotes/tn2326/_index.html#//apple_ref/doc/uid/DTS40014136)  

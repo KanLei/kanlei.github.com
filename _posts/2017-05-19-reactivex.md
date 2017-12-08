@@ -71,4 +71,5 @@ bag 类型是 `CompositeDisposable`，通过将不同的订阅添加到 bag 中�
 
 
 
-[*.NET Reactive Framework*](https://www.youtube.com/watch?v=looJcaeboBY) / [*Getting Started with Rx*](https://msdn.microsoft.com/en-us/library/hh242975(v=vs.103).aspx)
+[*.NET Reactive Framework*](https://www.youtube.com/watch?v=looJcaeboBY) / [*Getting Started with Rx*](https://msdn.microsoft.com/en-us/library/hh242975(v=vs.103).aspx) / [*Subject/Observer is Dual to Iterator*](http://csl.stanford.edu/%7Echristos/pldi2010.fit/meijer.duality.pdf) / 
+[*Async JavaScript with Reactive Extensions*](https://www.youtube.com/watch?v=XRYN2xt11Ek)

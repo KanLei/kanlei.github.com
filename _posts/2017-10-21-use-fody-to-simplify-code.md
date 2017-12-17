@@ -48,9 +48,9 @@ public string Foo
 
 每一个需要通知的属性，都需要定义成上面这样，不仅增加了键盘敲击次数，也增加了代码的阅读难度。我们也可以通过其它方式来消除样板代码，如 [BindableProperty](http://www.sullinger.us/blog/2014/12/20/good-bye-onpropertychanged-hello-bindableproperty)，但 Fody 会让代码的定义更加简洁直观。
 
-##### 使用 PropertyChanged.Fody 消除样板代码
+#### 使用 PropertyChanged.Fody 消除样板代码
 
-PropertyChanged.Fody 会自动在编译期为实现了 INotifyPropertyChanged 的类插入 OnPropertyChanged() 的调用，比如像上面的属性定义可以定义成这样
+PropertyChanged.Fody 会自动在编译期为实现了 INotifyPropertyChanged 类的属性插入 OnPropertyChanged() 的调用，比如像上面的属性定义可以定义成这样
 
 ```csharp
 public string Foo { get; set; }

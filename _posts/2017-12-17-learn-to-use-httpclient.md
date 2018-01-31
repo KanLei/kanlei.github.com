@@ -13,7 +13,7 @@ tags: []
 
 ### GET | POST | PUT | DELETE
 
-我们知道根据不同的请求动词，我们可以指定不同的请求操作。下面我们来看一下`HttpClient`中以上这四个请求动词是如何使用的。
+我们知道根据不同的请求动词，可以指定不同的请求操作。下面来看一下`HttpClient`中以上这四个请求动词是如何使用的。
 
 #### GET
 
@@ -30,9 +30,9 @@ public async Task GetStringAsync()
 }
 ```
 
-由于`HttpClient`实现了`IDisposable`接口，所以我们可以通过`using`语句来释放不再使用的内部`Socket`连接。
+由于`HttpClient`实现了`IDisposable`接口，所以可以使用`using`语句来释放不再使用的底层`Socket`连接。
 
-> 通常，在项目中我们只会定义一个`HttpClient`实例，所有的请求都复用这个实例，这样做不仅避免了我们在每次请求时都指定请求头、`Cookie`、缓存等其它配置项，还复用了底层的`Socket`连接，避免不必要的重复创建和释放的过程，而且`HttpClient`是保证线程安全的，也不存在多线程竞争的问题；否则甚至可能会导致[`SocketException`](https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client#create-and-initialize-httpclient)。
+> 通常，在项目中我们只会定义一个`HttpClient`实例，所有的请求都复用这个实例，这样做不仅避免了在每次请求时都指定请求头、`Cookie`、缓存等其它配置项，还复用了底层的`Socket`连接，避免不必要的重复创建和释放的过程，而且`HttpClient`是保证线程安全的，也不存在多线程竞争的问题；否则甚至可能会导致[`SocketException`](https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client#create-and-initialize-httpclient)。
 
 除了`GetStringAsync`方法，类库还提供了`GetStreamAsync`获取流，`GetByteArrayAsync`获取字节数组，以及`GetAsync`获取完整的响应消息，该方法还提供了`HttpCompletionOption`以及`CancellationToken`重载，用于指定响应的条件，比如在响应头可用时即识别出是否支持当前响应的处理，以及支持取消操作。
 

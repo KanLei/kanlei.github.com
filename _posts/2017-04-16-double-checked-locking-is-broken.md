@@ -299,14 +299,3 @@ class Foo {
 #### 不可变对象(Immutable Objects)
 
 如果 `Helper` 是一个不可变对象，所有 `Helper` 的字段都被标记为 `final`，那么不需要使用 `volatile` 也能使 `double-checked locking` 正常工作。原因是引用不可变对象(如 String 或 Integer)的行为应该表现的和 `int` 或 `float` 一致，读和写引用不可变对象是原子操作。
-
-## double-check 原语的描述
-
-- [Reality Check](http://www.cs.wustl.edu/~schmidt/editorial-3.html), Douglas C. Schmidt, C++ Report, SIGS, Vol. 8, No. 3, March 1996.
-- [Double-Checked Locking: An Optimization Pattern for Efficiently Initializing and Accessing Thread-safe Objects](http://www.cs.wustl.edu/~schmidt/DC-Locking.ps.gz), Douglas Schmidt and Tim Harrison. 3rd annual Pattern Languages of Program Design conference, 1996
-- [Lazy instantiation](http://www.javaworld.com/article/2077568/learn-java/java-tip-67--lazy-instantiation.html), Philip Bishop and Nigel Warren, JavaWorld Magazine
-- [Programming Java threads in the real world, Part 7](http://www.javaworld.com/), Allen Holub, Javaworld Magazine, April 1999.
-- [Java 2 Performance and Idiom Guide](http://www.phptr.com/ptrbooks/ptr_0130142603.html), Craig Larman and Rhett Guthrie, p100.
-- [Java in Practice: Design Styles and Idioms for Effective Java](http://www.google.com/search?q=Java+Design+Styles+Nigel+Bishop), Nigel Warren and Philip Bishop, p142.
-- Rule 99, [The Elements of Java Style](http://www.google.com/search?q=elements+java+style+Ambler), Allan Vermeulen, Scott Ambler, Greg Bumgardner, Eldon Metz, Trvor Misfeldt, Jim Shur, Patrick Thompson, SIGS Reference library
-- [Global Variables in Java with the Singleton Pattern](http://gamelan.earthweb.com/journal/techfocus/022300_singleton.html), Wiebe de Jong, Gamelan

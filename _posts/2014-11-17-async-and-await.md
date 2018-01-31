@@ -180,4 +180,5 @@ private struct HttpLengthSM: IAsyncStateMachine
 [*Scott Hanselman*](http://www.hanselman.com/blog/TheMagicOfUsingAsynchronousMethodsInASPNET45PlusAnImportantGotcha.aspx) / 
 [*asp.net*](http://www.asp.net/web-forms/overview/performance-and-caching/using-asynchronous-methods-in-aspnet-45) /
 [*Be Aware Of The Synchronization-Context*](http://www.gamlor.info/wordpress/2010/10/c-5-0-async-feature-be-aware-of-the-synchronization-context/) / [*Understanding-SynchronizationContext*](http://www.codeproject.com/Articles/31971/Understanding-SynchronizationContext-Part-I) / 
-[*Synchronous and Asynchronous I/O*](http://msdn.microsoft.com/en-us/library/windows/desktop/aa365683(v=vs.85).aspx)
+[*Synchronous and Asynchronous I/O*](http://msdn.microsoft.com/en-us/library/windows/desktop/aa365683(v=vs.85).aspx) / 
+[*Extending The Async Methods*](https://blogs.msdn.microsoft.com/seteplia/2018/01/11/extending-the-async-methods-in-c/)

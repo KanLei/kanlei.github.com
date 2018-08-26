@@ -94,6 +94,26 @@ ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, 
 };
 ```
 
+附：
+
+生成 .cer 文件
+
+```
+openssl s_client -connect www.example.com:443 -servername www.baidu.com < /dev/null | openssl x509 -outform DER > server.cer
+```
+
+转换成 .pem 格式
+
+```
+openssl x509 -in server.cer -inform DER -out server.pem -outform PEM
+```
+
+hash -> base64
+
+```
+openssl s_client -connect www.example.com:443 | openssl x509 -pubkey -noout | openssl dgst -sha256 -binary | openssl enc -base64
+```
+
 
 [*Pinning Cheat Sheet*](https://www.owasp.org/index.php/Pinning_Cheat_Sheet)  
 [*SSL Certificate Pinning in mobile applications*](https://www.bugsee.com/blog/ssl-certificate-pinning-in-mobile-applications/)  
@@ -104,4 +124,5 @@ ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, 
 [*RSA Key Formats*](https://www.cryptosys.net/pki/rsakeyformats.html)  
 [*Transform Public Key Format*](https://stackoverflow.com/questions/18039401/how-can-i-transform-between-the-two-styles-of-public-key-format-one-begin-rsa)  
 [*Creating Certificates for TLS Testing*](https://developer.apple.com/library/content/technotes/tn2326/_index.html#//apple_ref/doc/uid/DTS40014136)  
-[*openssl*](https://www.madboa.com/geek/openssl/)
+[*openssl*](https://www.madboa.com/geek/openssl/)  
+[*Protecting your users with certificate pinning*](https://basdecort.com/2018/07/18/protecting-your-users-with-certificate-pinning/?utm_campaign=Weekly%2BXamarin&utm_medium=email&utm_source=Weekly_Xamarin_165)

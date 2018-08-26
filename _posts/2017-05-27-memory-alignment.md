@@ -9,7 +9,7 @@ tags: []
 
 ### 什么是内存对齐？
 
-现在的计算机普遍采用的是 64bit 和 32bit 的 CPU，而为了让 CPU 更高效地读写内存，采用了按 [**word size**](https://stackoverflow.com/questions/19821103/what-does-it-mean-by-word-size-in-computer) 来读取的方式（64bit word size 是 8 字节，32bit word size 是 4 字节），之所以这么做，是为了避免 CPU 为了读取一个类型的值而多次访问内存，造成额外的访问开销。实现这种高效访问内存的手段就是要让类型存储地址保证对齐，保证 CPU 一次就可以完成读取和写入操作。
+现在的计算机普遍采用的是 64bit 和 32bit 的 CPU，而为了让 CPU 更高效地读写内存，采用了按 [**word size**](https://stackoverflow.com/questions/19821103/what-does-it-mean-by-word-size-in-computer) 来读取的方式（64bit word size 是 8 字节，32bit word size 是 4 字节），之所以这么做，是为了避免 CPU 为了读取一个类型的值而多次访问内存，造成额外的访问开销。实现这种高效访问内存的手段就是要让类型存储地址与其大小对齐，保证 CPU 一次就可以完成读取或写入操作。
 
 ### 内存如何对齐？
 
@@ -39,7 +39,7 @@ MemoryLayout<Int32>.alignment   // 4
 MemoryLayout<Int16>.alignment   // 2
 ```
 
-`Swift` 中我们可以通过 `alignment` 属性得到对齐大小。`Int8` 的对齐大小为 1，所以 `Int8` 所在的起始地址必须是 1 的倍数；`Int32` 的对齐大小为 4，起始地址必须是 4 的倍数；`Int16` 对齐大小为 2，起始地址必须是 2 的倍数。从上可以得出结论，**类型存储的起始地址必须是类型对齐大小的倍数**。
+`Swift` 中我们可以通过 `alignment` 属性得到对齐大小。`Int8` 的对齐大小为 1，所以 `Int8` 所在的起始地址必须是 1 的倍数；`Int32` 的对齐大小为 4，起始地址必须是 4 的倍数；`Int16` 对齐大小为 2，起始地址必须是 2 的倍数。从上可以得出结论，**类型存储的起始地址必须是类型对齐大小的整数倍**。
 
 通过上面的描述，真实的内存布局应该如下所示：
 

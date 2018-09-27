@@ -89,13 +89,13 @@ tags: [Xamarin.iOS]
 
 在 iOS 8 之后，Apple 提供了 **embedded framwork**，用于分发模块化可共享的代码，使用 `Xcode` 创建的 **embedded framework** 需要以 [**Native Reference**](https://developer.xamarin.com/guides/cross-platform/macios/native-references/) 的方式使用。
 
-**Embedded Framwork** 与 **Dynamic Framework** 并不是对立关系，**Dynamic Framework** 与 **Static Framework** 是对立关系。[Abount Embbed Framwork](http://stackoverflow.com/questions/25080914/will-ios-8-support-dynamic-linking)
+**Embedded Framwork** 与 **Dynamic Framework** 并不是对立关系，**Dynamic Framework** 与 **Static Framework** 是对立关系。[About Embbed Framwork](http://stackoverflow.com/questions/25080914/will-ios-8-support-dynamic-linking)
 
 [Static vs dynamic frameworks](http://stackoverflow.com/questions/27899799/ios-static-vs-dynamic-frameworks-clarifications) /
 [Library? Static? Dynamic? Or Framework?](http://stackoverflow.com/questions/15331056/library-static-dynamic-or-framework-project-inside-another-project) /
 [Creating and distributing embedded framworks in iOS](http://code.hootsuite.com/an-introduction-to-creating-and-distributing-embedded-frameworks-in-ios/) /
 [Framework Programming Guide](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WhatAreFrameworks.html) /
-[Dynamic Library Programming Topics](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html#//apple_ref/doc/uid/TP40001873-SW1)
+[Dynamic Library Programming Topics](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html#//apple_ref/doc/uid/TP40001873-SW1) / [iOS Static Dynamic Framework Learning](https://skyline75489.github.io/post/2015-8-14_ios_static_dynamic_framework_learning.html)
 
 
 ## 创建 C# 绑定项目
@@ -148,7 +148,12 @@ tags: [Xamarin.iOS]
  
 有时候我们无法 `new` 一个抽象类，此时可以采用 `ObjCRuntime.Runtime.GetNSObject()` 间接地获取该对象，并通过 `PerformSelector()` 的方式发送消息。
 
-#### 附
-[C# 与 Objective-C](https://developer.xamarin.com/guides/ios/advanced_topics/xamarin_for_objc/) /
-[Events, Protocol and Delegates](https://developer.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events/) /
-[Binding Objective-C](https://developer.xamarin.com/guides/cross-platform/macios/binding/) / [Binding vs Converting](http://pierceboggan.tumblr.com/page/2) / [Binding iOS libraries in Xamarin](http://www.jimbobbennett.io/binding-ios-libraries-in-xamarin/) / [Diving into Xamarin: Reusing Objective-C Libraries](https://medium.com/xamarin-development/diving-into-xamarin-reusing-objective-c-libraries-18b6f29c7922) / [Creating a Static Library in iOS Tutorial](https://www.raywenderlich.com/41377/creating-a-static-library-in-ios-tutorial) / [Creating Xamarin.iOS bindings for a native library](http://kannan-chandra.com/posts/xamarin-binding-appsee/) / [Specify extra GCC flags](http://ipixels.net/blog/specify-extra-gcc-flags-for-native-library-binding-in-xamarin-ios/)
+
+[*C# 与 Objective-C*](https://developer.xamarin.com/guides/ios/advanced_topics/xamarin_for_objc/)  
+[*Events, Protocol and Delegates*](https://developer.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events/)  
+[*Binding Objective-C*](https://developer.xamarin.com/guides/cross-platform/macios/binding/)  
+[*Binding vs Converting*](http://pierceboggan.tumblr.com/page/2)    [*Binding iOS libraries in Xamarin*](http://www.jimbobbennett.io/binding-ios-libraries-in-xamarin/)  
+[*Diving into Xamarin: Reusing Objective-C Libraries*](https://medium.com/xamarin-development/diving-into-xamarin-reusing-objective-c-libraries-18b6f29c7922)  
+[*Creating a Static Library in iOS Tutorial*](https://www.raywenderlich.com/41377/creating-a-static-library-in-ios-tutorial)  
+[*Creating Xamarin.iOS bindings for a native library*](http://kannan-chandra.com/posts/xamarin-binding-appsee/)  
+[*Specify extra GCC flags*](http://ipixels.net/blog/specify-extra-gcc-flags-for-native-library-binding-in-xamarin-ios/)  

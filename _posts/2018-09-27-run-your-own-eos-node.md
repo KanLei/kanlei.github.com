@@ -38,7 +38,14 @@ nodeos -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_api_
 
 修改上面生成的配置目录中 **config.ini** 文件
 
-* 增加 p2p-peer-address 配置 [*节点列表1*](https://eosnodes.privex.io/)、[*节点列表2*](https://docs.google.com/spreadsheets/d/1K_un5Vak3eDh_b4Wdh43sOersuhs0A76HMCfeQplDOY/edit#gid=0)
+* 增加 p2p-peer-address 配置
+
+节点列表数据可以参考：([*source1*](https://eosnodes.privex.io/)、[*source2*](https://docs.google.com/spreadsheets/d/1K_un5Vak3eDh_b4Wdh43sOersuhs0A76HMCfeQplDOY/edit#gid=0))
+
+* 允许外部网络访问
+
+http-server-address = 127.0.0.1:8888
+
 * 增加 plugin 配置
 
 ```

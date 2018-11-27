@@ -60,13 +60,6 @@ nav div {
     margin-top: 15px;
 }
 
-@media(max-width:599px) {
-    nav div {
-        margin-left: 40%;
-        margin-top: 15px;
-    }
-}
-
 /*首页文章列表样式*/
 ul.posts {
     color: white;

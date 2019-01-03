@@ -227,6 +227,7 @@ public abstract class HttpMessageHandler : IDisposable
 ```
 HttpMessageHandler -> DelegatingHandler -> MessageProcessingHandler
 HttpMessageHandler -> HttpClientHandler
+HttpMessageHandler -> SocketsHttpHandler
 ```
 
 `HttpClient`默认`handler`构造是`HttpClientHandler`，其定义了如 Cookie、Credentials、Proxy 等功能。`DelegatingHandler`则提供了一个`InnerHandler`属性，使得我们可以串联现有的`handler`，每个`handler`仅负责处理请求或响应过程中的一个阶段。`MessageProcessingHandler`则提供了更方便的`ProcessRequest`和`ProcessResponse`方法用于子类实现。

@@ -72,7 +72,7 @@ disableClientAuth = true;
 接着我们来测试下钱包是否能正常访问
 
 ```
-curl -k https:://localhost:8090/api/v1/node-info | jq
+curl -k https://localhost:8090/api/v1/node-info | jq
 ```
 
 curl 默认启用服务器证书校验，因此指定参数 -k 禁用

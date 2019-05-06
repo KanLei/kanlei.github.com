@@ -136,6 +136,28 @@ gaiacli tx multisign unsignedTx.json multisig_keyname_12 name1signature.json nam
 gaiacli tx broadcast signedTx.json
 ```
 
+### 使用 Ledger
+
+首先，连接并解锁 Ledger，打开 Cosmos 应用
+
+使用 Ledger 中的助记词生成账号
+
+```bash
+gaiacli keys add ledger_account —-ledger
+```
+
+在线发送交易
+
+```bash
+gaiacli tx send recipient_address 1muon -—chain-id=gaia-13002 —-from=ledger_account
+```
+
+离线签名交易
+
+```bash
+gaiacli tx sign unsignedTx.json --from=ledger_account --chain-id=gaia-13002 --account-number=1053 --sequence=1 --offline > signedTx.json
+```
+
 
 [*Mint Scan*](https://www.mintscan.io/)  
 [*Documents*](https://cosmos.network/docs/)  

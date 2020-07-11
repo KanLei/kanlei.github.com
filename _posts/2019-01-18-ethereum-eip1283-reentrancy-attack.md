@@ -109,7 +109,7 @@ contract Attacker {
 > call(g, a, v, in, insize, out, outsize)  
 > *call contract at address a with input mem[in…(in+insize)) providing g gas and v wei and output area mem[out…(out+outsize)) returning 0 on error (eg. out of gas) and 1 on success*
 
-最后我们来分析一下这段汇编代码做了什么，首先通过 `web3.utils.sha3("updateSplit(uint256,uint256)")` 计算并获取方法签名的前4个字节 0xc3b18fb6，接着我们将该方法签名补齐32字节并存储到 0x80 地址（当前 solidity 实现将自由内存指针 [0x80](https://solidity.readthedocs.io/en/v0.5.2/assembly.html) 存放在 0x40 位置），然后通过 `call` 调用，`call` 的参数解释如下，指定花费 gas limit 10000，被攻击者合约地址 x，方法和参数起始地址 0x80，参数的长度 0x44(即 68 bytes = 4 method sign bytes + 32 bytes uint256 + 32 bytes uint256)，输出值的起始地址 0，输出值的长度 0，最后把 `call` 返回值从栈中移除。
+最后我们来分析一下这段汇编代码做了什么，首先通过 `web3.utils.sha3("updateSplit(uint256,uint256)")` 计算并获取方法签名的前4个字节 0xc3b18fb6，接着我们将该方法签名补齐32字节并存储到 0x80 地址（当前 solidity 实现将自由内存指针 [0x80](https://solidity.readthedocs.io/en/v0.5.2/assembly.html) 存放在 0x40 位置），然后通过 `call` 调用，`call` 的参数解释如下，指定花费 gas limit 10000，被攻击者合约地址 x，转账 ether 金额 0，方法和参数起始地址 0x80，参数的长度 0x44(即 68 bytes = 4 method sign bytes + 32 bytes uint256 + 32 bytes uint256)，输出值的起始地址 0，输出值的长度 0，最后把 `call` 返回值从栈中移除。
 
 
 [*ethereum-constantinople-upgrade-announcement*](https://blog.ethereum.org/2019/01/11/ethereum-constantinople-upgrade-announcement/)  
